@@ -6,6 +6,7 @@ import '../widgets/buttons/main_button.dart';
 import '../widgets/form/text_input.dart';
 import '../widgets/form/password_input.dart';
 import '../widgets/form/validation.dart';
+import 'register_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -23,13 +24,12 @@ class LoginScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Padding(
-                padding: EdgeInsets.only(top: 85),
+                padding: EdgeInsets.only(top: 50),
                 child: Text(
                   'Connexion',
                   style: kTitleStyle,
                 ),
               ),
-              // Text for introduction
               const Padding(
                 padding: EdgeInsets.all(kPadding),
                 child: Text(
@@ -69,7 +69,6 @@ class LoginScreen extends StatelessWidget {
                         },
                       ),
                     ),
-                    // Password forgotten link
                     Padding(
                       padding: const EdgeInsets.all(kPaddingS),
                       child: Align(
@@ -110,7 +109,56 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-              )
+              ),
+              const Padding(
+                padding: EdgeInsets.all(kPadding),
+                child: Text(
+                  'Ou connectez-vous avec',
+                  textAlign: TextAlign.center,
+                  style: kText,
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: kHorizontalPadding,
+                  vertical: kVerticalPadding,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // Logo Google
+                    // Logo Apple
+                    // Logo Facebook
+                  ],
+                ),
+              ),
+
+              // Not subscribe yet
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: kVerticalPaddingXL),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Pas encore de compte ?',
+                      style: kText,
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => RegisterScreen(),
+                          ),
+                        );
+                      },
+                      child: const Text(
+                        'Inscrivez-vous',
+                        style: kButtonUnderline,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
