@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "315602019032",
+    "project_id": "pet4life-2023-2024",
+    "storage_bucket": "pet4life-2023-2024.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:315602019032:android:fa21e7c5841adcd2d76dad",
+        "android_client_info": {
+          "package_name": "be.hepl.pet4life"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-ktQBcthyqAPUqvtWA_4hC_-8cle9qQA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
