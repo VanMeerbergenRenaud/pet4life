@@ -6,13 +6,13 @@ import '../../styles/spacings.dart';
 
 @immutable
 class TextInput extends StatelessWidget {
+  final TextInputType keyboardType;
   final IconData prefixIcon;
   final String hintText;
-  final String? tooltipMessage;
   final String labelText;
   final bool obscureText;
-  final TextInputType keyboardType;
   final Widget? suffixIcon;
+  final String? tooltipMessage;
   final FormFieldValidator<String> validator;
 
   final String? initialValue;
@@ -42,10 +42,9 @@ class TextInput extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-            padding: const EdgeInsets.only(left: kHorizontalPadding),
-            child: tooltipMessage != null
-                ? Tooltip(
-              height: 30,
+            padding: const EdgeInsets.only(left: kHorizontalPadding, bottom: 10),
+            child: tooltipMessage != null ? Tooltip (
+              height: 32,
               message: tooltipMessage,
               child: Row(
                 children: [
@@ -60,8 +59,7 @@ class TextInput extends StatelessWidget {
                   )
                 ],
               ),
-            )
-                : Text(
+            ) : Text(
               labelText,
               style: kLabelStyle,
             )),
@@ -85,9 +83,6 @@ class TextInput extends StatelessWidget {
             hintStyle: kHintStyle,
           ),
         ),
-        const SizedBox(
-          height: kVerticalPadding,
-        )
       ],
     );
   }

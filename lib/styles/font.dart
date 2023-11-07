@@ -2,6 +2,18 @@ import 'package:flutter/material.dart';
 
 import 'colors.dart';
 
+const kTitleStyle = TextStyle(
+  fontSize: 24,
+  fontWeight: FontWeight.bold,
+  color: kBlack,
+);
+
+const kText = TextStyle(
+  fontSize: 16,
+  fontWeight: FontWeight.w400,
+  color: kBlack,
+);
+
 const kItalicText = TextStyle(
   fontSize: 19,
   fontWeight: FontWeight.w500,
@@ -15,10 +27,17 @@ const kButtonStyle = TextStyle(
   color: kBackgroundColor,
 );
 
-const kLabelStyle = TextStyle(
-  color: kMainColor,
+const kButtonUnderline = TextStyle(
+  fontSize: 16,
   fontWeight: FontWeight.w500,
+  color: kMainColor,
+  decoration: TextDecoration.underline,
+);
+
+const kLabelStyle = TextStyle(
   fontSize: 18,
+  fontWeight: FontWeight.w500,
+  color: kBlack,
 );
 
 const kSmallText = TextStyle(

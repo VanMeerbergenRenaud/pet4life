@@ -3,7 +3,8 @@ const kPadding = 16.0; // 16 pixels
 const kHorizontalPadding = 16.0;
 const kVerticalPadding = 16.0;
 
-const kHorizontalPaddingS = kHorizontalPadding / 2; // 8
+const kPaddingS = kPadding / 2; // 8
+const kHorizontalPaddingS = kHorizontalPadding / 2;
 const kVerticalPaddingS = kVerticalPadding / 2;
 
 const kHorizontalPaddingL = kHorizontalPadding * 2; // 32
