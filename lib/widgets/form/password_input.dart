@@ -9,6 +9,8 @@ class PasswordInput extends StatefulWidget {
   final FormFieldValidator<String> validator;
   final ValueChanged<String>? onChanged;
 
+  final TextEditingController? controller;
+
   const PasswordInput({
     Key? key,
     required this.prefixIcon,
@@ -16,6 +18,7 @@ class PasswordInput extends StatefulWidget {
     required this.labelText,
     required this.validator,
     this.onChanged,
+    this.controller,
   }) : super(key: key);
 
   @override
@@ -35,6 +38,8 @@ class _PasswordInputState extends State<PasswordInput> {
           hintText: widget.hintText,
           prefixIcon: widget.prefixIcon,
           validator: widget.validator,
+          onChanged: widget.onChanged,
+          controller: widget.controller,
           obscureText: _obscureText,
           suffixIcon: IconButton(
             icon:

@@ -28,8 +28,8 @@ String? validatePassword(String value) {
     if (value.isEmpty) {
       return 'Veuillez saisir un mot de passe.';
     }
-    if (value.length < 5) {
-      return 'Le mot de passe doit contenir au moins 5 caractères.';
+    if (value.length < 8) {
+      return 'Le mot de passe doit contenir au moins 8 caractères.';
     }
     return null;
 }

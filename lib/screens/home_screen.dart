@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 
 class HomePageScreen extends StatelessWidget {
-  const HomePageScreen({super.key});
+  const HomePageScreen({Key? key}) : super(key: key);
 
   static const String routeName = '/home';
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home Page'),
-      ),
+    return const Center(
+      child: Text('Home Page'),
     );
   }
 }

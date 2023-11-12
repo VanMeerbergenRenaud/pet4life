@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../styles/font.dart';
@@ -6,14 +8,19 @@ import '../widgets/buttons/main_button.dart';
 import '../widgets/form/text_input.dart';
 import '../widgets/form/password_input.dart';
 import '../widgets/form/validation.dart';
+
+import 'home_screen.dart';
 import 'login_screen.dart';
 
 class RegisterScreen extends StatelessWidget {
-  RegisterScreen({super.key});
-
   static const String routeName = '/register';
+  final _registerFormKey = GlobalKey<FormState>();
 
-  final _formKey = GlobalKey<FormState>();
+  final String _name = "";
+  final String _email = "";
+  String _password = "";
+
+  RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +46,7 @@ class RegisterScreen extends StatelessWidget {
                 ),
               ),
               Form(
-                key: _formKey,
+                key: _registerFormKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -48,11 +55,14 @@ class RegisterScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
                       child: TextInput(
                         prefixIcon: Icons.person,
-                        hintText: 'Renaud Vmb',
-                        labelText: 'Nom d‘utilisateur',
+                        hintText: 'Dominique',
+                        labelText: 'Prénom',
+                        keyboardType: TextInputType.name,
+                        initialValue: 'Renaud',
                         validator: (value) {
-                          return validateName(value!, 'prénom');
+                          return validateName(value!, 'Prénom');
                         },
+                        // controller: _name,
                       ),
                     ),
                     // Email input
@@ -69,6 +79,7 @@ class RegisterScreen extends StatelessWidget {
                           return validateEmail(value!);
                         },
                         keyboardType: TextInputType.emailAddress,
+                        // controller: _email,
                       ),
                     ),
                     // Password input
@@ -76,12 +87,16 @@ class RegisterScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: kHorizontalPadding),
                       child: PasswordInput(
-                        prefixIcon: Icons.password,
+                        prefixIcon: Icons.lock,
                         hintText: '*******',
                         labelText: 'Password',
+                        onChanged: (value) {
+                          _password = value;
+                        },
                         validator: (value) {
                           return validatePassword(value!);
                         },
+                        // controller: _password,
                       ),
                     ),
                     // Password forgotten link
@@ -94,21 +109,37 @@ class RegisterScreen extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: kVerticalPaddingL),
+                              padding: const EdgeInsets.symmetric(vertical: kVerticalPaddingL),
                               child: MainButton(
-                                label: 'S‘inscrire',
-                                onTap: () {
-                                  if (_formKey.currentState!.validate()) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                        content: Text(
-                                            'Traitement des données en cours...'),
-                                      ),
-                                    );
-                                  }
-                                },
-                              ),
+                                  onTap: () async {
+                                    if (_registerFormKey.currentState != null &&
+                                        _registerFormKey.currentState!.validate()) {
+                                      try {
+                                        // Connection vers Firebase et appel de la méthode createUserWithEmailAndPassword
+                                        // Cette partie prend plusieurs secondes à s'exécuter donc on utilise le mot clé 'await' qui va de pair avec async()
+                                        await FirebaseAuth.instance
+                                            .createUserWithEmailAndPassword(
+                                            email: _email, password: _password)
+                                            .then((value) => {
+                                          // Création de la navigation vers la route Home
+                                          Navigator.pushNamed(
+                                              context, HomePageScreen.routeName)
+                                        });
+                                        var collection = FirebaseFirestore.instance.collection('users');
+                                        var querySnapshot = await collection.add({
+                                          'name': _name,
+                                          'email': _email,
+                                        });
+                                      } on FirebaseAuthException catch (e) {
+                                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                          showCloseIcon: true,
+                                          duration: const Duration(seconds: 10),
+                                          content: Text(e.message ?? 'Erreur inconnue'),
+                                        ));
+                                      }
+                                    }
+                                  },
+                                  label: 'Créer son compte'),
                             ),
                           ),
                         ],
