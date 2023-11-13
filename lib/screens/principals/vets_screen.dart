@@ -13,7 +13,7 @@ class VetsPageScreen extends StatelessWidget {
       // app bar
       appBar: AppBar(
         title: const Text('Vets Page'),
-        backgroundColor: kMainColor,
+        backgroundColor: kSecondaryColor,
       ),
       body: const SafeArea(
         child: Text('Vets Page'),

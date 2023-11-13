@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:pet4life/styles/colors.dart';
-import 'package:pet4life/styles/spacings.dart';
+import 'package:pet4life/styles/others.dart';
+
+import '../../styles/spacings.dart';
+import '../../widgets/buttons/settings_option.dart';
+import '../../widgets/buttons/settings_profil.dart';
 
 class SettingsPageScreen extends StatelessWidget {
   const SettingsPageScreen({super.key});
@@ -14,7 +18,7 @@ class SettingsPageScreen extends StatelessWidget {
       // app bar
       appBar: AppBar(
         title: const Text('Settings Page'),
-        backgroundColor: kMainColor,
+        backgroundColor: kSecondaryColor,
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),
@@ -36,26 +40,17 @@ class SettingsPageScreen extends StatelessWidget {
                   Radius.circular(24),
                 ),
               ),
-              child : Column(
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.all(12),
-                    child: Text(
-                      'Settings Page',
-                      style: TextStyle(
-                        color: kBlack,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Logout user with Firebase instance
-
-                    },
-                    child: const Text('Logout'),
-                  ),
-                ],
+              child: Padding(
+                padding: const EdgeInsets.all(kPadding),
+                child: Column(
+                  children: [
+                    SettingsProfil(),
+                    const SettingsOption(icon: Icons.settings, text: 'Settings'),
+                    const SettingsOption(icon: Icons.account_circle, text: 'Account'),
+                    const SettingsOption(icon: Icons.notifications, text: 'Notifications'),
+                    const SettingsOption(icon: Icons.logout, text: 'Log Out'),
+                  ],
+                ),
               ),
             ),
           ],

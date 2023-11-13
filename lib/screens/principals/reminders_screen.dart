@@ -13,7 +13,7 @@ class RemindersPageScreen extends StatelessWidget {
       // app bar
       appBar: AppBar(
         title: const Text('Reminders Page'),
-        backgroundColor: kMainColor,
+        backgroundColor: kSecondaryColor,
       ),
       body: const SafeArea(
         child: Text('Reminders Page'),

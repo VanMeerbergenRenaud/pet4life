@@ -12,7 +12,7 @@ class HomePageScreen extends StatelessWidget {
       // app bar
       appBar: AppBar(
         title: const Text('Home Page'),
-        backgroundColor: kMainColor,
+        backgroundColor: kSecondaryColor,
       ),
       body: const SafeArea(
         child: Text('Home Page'),
