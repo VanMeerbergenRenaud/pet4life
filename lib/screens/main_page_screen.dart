@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:pet4life/screens/animals_screen.dart';
-import 'package:pet4life/screens/home_screen.dart';
-import 'package:pet4life/screens/reminders_screen.dart';
-import 'package:pet4life/screens/settings_screen.dart';
-import 'package:pet4life/screens/vets_screen.dart';
 import '../styles/colors.dart';
+
+import 'principals/animals_screen.dart';
+import 'principals/home_screen.dart';
+import 'principals/reminders_screen.dart';
+import 'principals/settings_screen.dart';
+import 'principals/vets_screen.dart';
 
 class MainScreenPage extends StatefulWidget {
   const MainScreenPage({super.key});

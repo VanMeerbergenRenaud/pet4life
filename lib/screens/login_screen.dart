@@ -1,6 +1,5 @@
 import "package:flutter/material.dart";
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:pet4life/screens/home_screen.dart';
 import 'package:pet4life/screens/main_page_screen.dart';
 
 import '../styles/font.dart';

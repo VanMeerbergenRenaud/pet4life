@@ -9,7 +9,7 @@ import '../widgets/form/text_input.dart';
 import '../widgets/form/password_input.dart';
 import '../widgets/form/validation.dart';
 
-import 'home_screen.dart';
+import 'principals/home_screen.dart';
 import 'login_screen.dart';
 
 class RegisterScreen extends StatelessWidget {
