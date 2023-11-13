@@ -1,11 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:pet4life/screens/login_screen.dart';
 
-import 'package:pet4life/styles/colors.dart';
-import 'package:pet4life/styles/others.dart';
-
+import '../../styles/colors.dart';
 import '../../styles/spacings.dart';
 import '../../widgets/buttons/settings_option.dart';
 import '../../widgets/buttons/settings_profil.dart';
+import '../settings/profil_screen.dart';
 
 class SettingsPageScreen extends StatelessWidget {
   const SettingsPageScreen({super.key});
@@ -36,19 +37,62 @@ class SettingsPageScreen extends StatelessWidget {
             Container(
               decoration: const BoxDecoration(
                 color: kWhite,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(24),
-                ),
               ),
               child: Padding(
                 padding: const EdgeInsets.all(kPadding),
                 child: Column(
                   children: [
-                    SettingsProfil(),
-                    const SettingsOption(icon: Icons.settings, text: 'Settings'),
-                    const SettingsOption(icon: Icons.account_circle, text: 'Account'),
-                    const SettingsOption(icon: Icons.notifications, text: 'Notifications'),
-                    const SettingsOption(icon: Icons.logout, text: 'Log Out'),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const ProfilScreen(),
+                          ),
+                        );
+                      },
+                      child: SettingsProfil(),
+                    ),
+                    GestureDetector(
+                      onTap: () {// Direction la page d'abonnement
+
+                      },
+                      child: const SettingsOption(
+                        icon: Icons.settings,
+                        text: 'Abonnement',
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {// Direction la page des notifications
+
+                      },
+                      child: const SettingsOption(
+                        icon: Icons.notifications,
+                        text: 'Notifications',
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {// Direction la page de confidentialité
+
+                      },
+                      child: const SettingsOption(
+                        icon: Icons.account_circle,
+                        text: 'Confidentialité',
+                      ),
+                    ),
+                    GestureDetector(
+                      child: const SettingsOption(
+                        icon: Icons.logout,
+                        text: 'Log Out',
+                      ),
+                      onTap: () async {
+                        await FirebaseAuth.instance.signOut();
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => LoginScreen(),
+                          ),
+                        );
+                      },
+                    ),
                   ],
                 ),
               ),

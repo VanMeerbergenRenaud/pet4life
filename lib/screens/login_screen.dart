@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import "package:flutter/material.dart";
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pet4life/screens/main_page_screen.dart';
@@ -131,6 +133,11 @@ class LoginScreen extends StatelessWidget {
                               onTap: () {
                                 if (_formKey.currentState!.validate()) {
                                   _signInWithEmailAndPassword(context);
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => const MainScreenPage(),
+                                    ),
+                                  );
                                 }
                               },
                             ),

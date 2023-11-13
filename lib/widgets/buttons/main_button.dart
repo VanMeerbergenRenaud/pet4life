@@ -34,16 +34,16 @@ class MainButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(kBorderRadius),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.2),
+              color: Colors.black.withOpacity(0.15),
               offset: const Offset(0, 0),
             ),
             BoxShadow(
-              color: Colors.black.withOpacity(0.2),
+              color: Colors.black.withOpacity(0.15),
               offset: const Offset(0, 6),
               blurRadius: 6,
             ),
             BoxShadow(
-              color: Colors.black.withOpacity(0.2),
+              color: Colors.black.withOpacity(0.15),
               offset: const Offset(0, 12),
               blurRadius: 12,
             ),
