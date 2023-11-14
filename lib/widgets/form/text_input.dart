@@ -20,6 +20,8 @@ class TextInput extends StatelessWidget {
 
   final TextEditingController? controller;
 
+  final FormFieldSetter<String>? onSaved;
+
   const TextInput({
     super.key,
     required this.prefixIcon,
@@ -34,6 +36,7 @@ class TextInput extends StatelessWidget {
     this.onChanged,
     this.initialValue,
     this.controller,
+    this.onSaved,
   });
 
   @override
@@ -43,6 +46,12 @@ class TextInput extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Padding(
+            padding: const EdgeInsets.only(left: kHorizontalPadding),
+            child: Text(
+              labelText,
+              style: kLabelStyle,
+            )),
         TextFormField(
           keyboardType: keyboardType,
           obscureText: obscureText,
@@ -65,6 +74,7 @@ class TextInput extends StatelessWidget {
             errorStyle: kErrorStyle,
             hintStyle: kHintStyle,
           ),
+          onSaved: onSaved,
         ),
       ],
     );

@@ -8,6 +8,12 @@ const kTitleStyle = TextStyle(
   color: kBlack,
 );
 
+const kTitleStyleWhite = TextStyle(
+  fontSize: 24,
+  fontWeight: FontWeight.bold,
+  color: kWhite,
+);
+
 const kText = TextStyle(
   fontSize: 16,
   fontWeight: FontWeight.w400,

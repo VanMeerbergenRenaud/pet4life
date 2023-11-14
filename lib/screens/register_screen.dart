@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:pet4life/screens/main_page_screen.dart';
 
 import '../styles/font.dart';
 import '../styles/spacings.dart';
@@ -13,16 +12,17 @@ import '../widgets/form/password_input.dart';
 import '../widgets/form/validation.dart';
 
 import 'login_screen.dart';
+import 'main_page_screen.dart';
 
 class RegisterScreen extends StatelessWidget {
+  RegisterScreen({super.key});
+
   static const String routeName = '/register';
   final _registerFormKey = GlobalKey<FormState>();
 
   final String _name = "";
   final String _email = "";
   String _password = "";
-
-  RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

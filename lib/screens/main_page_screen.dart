@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import '../styles/colors.dart';
 
-import 'principals/animals_screen.dart';
-import 'principals/home_screen.dart';
-import 'principals/reminders_screen.dart';
-import 'principals/settings_screen.dart';
-import 'principals/vets_screen.dart';
+import '../styles/colors.dart';
+import 'main/animals_screen.dart';
+import 'main/home_screen.dart';
+import 'main/reminders_screen.dart';
+import 'main/settings_screen.dart';
+import 'main/vets_screen.dart';
 
 class MainScreenPage extends StatefulWidget {
   const MainScreenPage({super.key});
 
   @override
-  _MainScreenPageState createState() => _MainScreenPageState();
+  State<MainScreenPage> createState() => _MainScreenPageState();
 }
 
 class _MainScreenPageState extends State<MainScreenPage> {
@@ -69,3 +69,5 @@ class _MainScreenPageState extends State<MainScreenPage> {
     );
   }
 }
+
+

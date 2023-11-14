@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import "package:flutter/material.dart";
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pet4life/screens/main_page_screen.dart';
@@ -85,7 +83,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                       child: TextInput(
                         prefixIcon: Icons.email,
-                        hintText: 'example@gmail.com',
+                        hintText: 'exemple@gmail.com',
                         labelText: 'Adresse mail',
                         validator: (value) {
                           return validateEmail(value!);
@@ -181,6 +179,10 @@ class LoginScreen extends StatelessWidget {
                       style: kText,
                     ),
                     TextButton(
+                      child: const Text(
+                        'Inscrivez-vous',
+                        style: kButtonUnderline,
+                      ),
                       onPressed: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
@@ -188,10 +190,6 @@ class LoginScreen extends StatelessWidget {
                           ),
                         );
                       },
-                      child: const Text(
-                        'Inscrivez-vous',
-                        style: kButtonUnderline,
-                      ),
                     ),
                   ],
                 ),
@@ -207,6 +205,10 @@ class LoginScreen extends StatelessWidget {
                       style: kText,
                     ),
                     TextButton(
+                      child: const Text(
+                        'Continuer',
+                        style: kButtonUnderline,
+                      ),
                       onPressed: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
@@ -214,10 +216,6 @@ class LoginScreen extends StatelessWidget {
                           ),
                         );
                       },
-                      child: const Text(
-                        'Continuer',
-                        style: kButtonUnderline,
-                      ),
                     ),
                   ],
                 ),

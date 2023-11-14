@@ -11,18 +11,24 @@ class PasswordInput extends StatefulWidget {
 
   final TextEditingController? controller;
 
+  final FormFieldSetter<String>? onSaved;
+
+  final String? initialValue;
+
   const PasswordInput({
-    Key? key,
+    super.key,
     required this.prefixIcon,
     required this.hintText,
     required this.labelText,
     required this.validator,
     this.onChanged,
     this.controller,
-  }) : super(key: key);
+    this.onSaved,
+    this.initialValue,
+  });
 
   @override
-  _PasswordInputState createState() => _PasswordInputState();
+  State<PasswordInput> createState() => _PasswordInputState();
 }
 
 class _PasswordInputState extends State<PasswordInput> {
@@ -42,14 +48,15 @@ class _PasswordInputState extends State<PasswordInput> {
           controller: widget.controller,
           obscureText: _obscureText,
           suffixIcon: IconButton(
-            icon:
-            Icon(_obscureText ? Icons.visibility_off : Icons.visibility),
+            icon: Icon(_obscureText ? Icons.visibility_off : Icons.visibility),
             onPressed: () {
               setState(() {
                 _obscureText = !_obscureText;
               });
             },
           ),
+          onSaved: widget.onSaved,
+          initialValue: widget.initialValue,
         ),
       ],
     );
