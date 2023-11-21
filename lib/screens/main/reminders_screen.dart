@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../styles/font.dart';
+import 'template_screen.dart';
+
 class RemindersPageScreen extends StatelessWidget {
   const RemindersPageScreen({super.key});
 
@@ -7,8 +10,12 @@ class RemindersPageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
-      child: Text('Reminders Page'),
-    );
+    return const HomePageTemplate(
+        title: Text(
+          'Vos rappels',
+          textAlign: TextAlign.center,
+          style: kTitleStyleWhite,
+        ),
+        flexibleContent: Text('Reminders'));
   }
 }

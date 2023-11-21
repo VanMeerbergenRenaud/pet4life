@@ -28,7 +28,7 @@ class _ProfilScreenState extends State<ProfilScreen> {
           child: Form(
             key: _formKey,
             child: Column(
-              children: <Widget>[
+              children: [
                 const CircleAvatar(
                   radius: 50,
                   backgroundImage:

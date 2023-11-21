@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pet4life/styles/font.dart';
-import 'package:pet4life/styles/spacings.dart';
 
-import '../../styles/colors.dart';
+import '../../styles/font.dart';
+import '../../styles/spacings.dart';
+import '../../widgets/card.dart' as my_card;
+import 'template_screen.dart';
 
 class AnimalsPageScreen extends StatelessWidget {
   const AnimalsPageScreen({super.key});
@@ -11,32 +12,42 @@ class AnimalsPageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: kSecondaryColor,
-      child: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const Padding(
-              padding: EdgeInsets.all(kPadding),
-              child: Text(
-                'Vos animaux',
-                textAlign: TextAlign.center,
-                style: kTitleStyleWhite,
-              ),
-            ),
-            Flexible(
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: kBackgroundColor,
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(24.0),
-                    topLeft: Radius.circular(24.0),
-                  ),
+    return HomePageTemplate(
+      title: const Text(
+        'Vos animaux',
+        textAlign: TextAlign.center,
+        style: kTitleStyleWhite,
+      ),
+      flexibleContent: Padding(
+        padding: const EdgeInsets.all(kPadding),
+        child: GridView.count(
+          crossAxisCount: 2,
+          crossAxisSpacing: kHorizontalPadding,
+          mainAxisSpacing: kHorizontalPadding,
+          children: List.generate(
+            10,
+            (index) {
+              return const my_card.Card(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircleAvatar(
+                      radius: 50,
+                      backgroundImage:
+                          NetworkImage('https://via.placeholder.com/150'),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(kPaddingS),
+                      child: Text(
+                        'Dog',
+                        style: kTitleStyle,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ),
-          ],
+              );
+            },
+          ),
         ),
       ),
     );

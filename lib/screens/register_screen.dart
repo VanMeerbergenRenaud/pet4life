@@ -12,7 +12,7 @@ import '../widgets/form/password_input.dart';
 import '../widgets/form/validation.dart';
 
 import 'login_screen.dart';
-import 'main_page_screen.dart';
+import 'main_screen.dart';
 
 class RegisterScreen extends StatelessWidget {
   RegisterScreen({super.key});

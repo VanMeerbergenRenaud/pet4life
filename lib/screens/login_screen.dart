@@ -1,6 +1,5 @@
 import "package:flutter/material.dart";
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:pet4life/screens/main_page_screen.dart';
 
 import '../styles/font.dart';
 import '../styles/spacings.dart';
@@ -8,6 +7,8 @@ import '../widgets/buttons/main_button.dart';
 import '../widgets/form/text_input.dart';
 import '../widgets/form/password_input.dart';
 import '../widgets/form/validation.dart';
+
+import 'main_screen.dart';
 import 'register_screen.dart';
 
 class LoginScreen extends StatelessWidget {

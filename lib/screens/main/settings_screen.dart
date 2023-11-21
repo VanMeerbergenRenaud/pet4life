@@ -2,11 +2,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pet4life/screens/login_screen.dart';
 
-import '../../styles/colors.dart';
+import '../../styles/font.dart';
 import '../../styles/spacings.dart';
 import '../../widgets/buttons/settings_option.dart';
 import '../../widgets/buttons/settings_profil.dart';
+
 import '../settings/profil_screen.dart';
+import 'template_screen.dart';
 
 class SettingsPageScreen extends StatelessWidget {
   const SettingsPageScreen({super.key});
@@ -15,16 +17,18 @@ class SettingsPageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Container(
-            decoration: const BoxDecoration(
-              color: kWhite,
-            ),
-            child: Padding(
+    return HomePageTemplate(
+      title: const Text(
+        'Paramètres',
+        textAlign: TextAlign.center,
+        style: kTitleStyleWhite,
+      ),
+      flexibleContent: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Padding(
               padding: const EdgeInsets.all(kPadding),
               child: Column(
                 children: [
@@ -82,8 +86,8 @@ class SettingsPageScreen extends StatelessWidget {
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

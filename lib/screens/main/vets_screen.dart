@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../styles/font.dart';
+import 'template_screen.dart';
+
 class VetsPageScreen extends StatelessWidget {
   const VetsPageScreen({super.key});
 
@@ -7,8 +10,13 @@ class VetsPageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
-      child: Text('Vets Page'),
+    return const HomePageTemplate(
+        title: Text(
+          'Vos vétérinaires',
+          textAlign: TextAlign.center,
+          style: kTitleStyleWhite,
+        ),
+        flexibleContent: Text('Vets')
     );
   }
 }
