@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:pet4life/widgets/services/firestore.dart';
 
 import '../styles/colors.dart';
+import '../widgets/services/firestore.dart';
+import 'animals/create_screen.dart';
 import 'main/animals_screen.dart';
 import 'main/home_screen.dart';
 import 'main/reminders_screen.dart';
@@ -42,7 +44,7 @@ class _MainScreenPageState extends State<MainScreenPage> {
     });
   }
 
-  void openAnimalModal() {
+  void openAnimalModal(String? docID) {
     showDialog(
       context: context,
       builder: (BuildContext context) => AlertDialog(
@@ -70,12 +72,21 @@ class _MainScreenPageState extends State<MainScreenPage> {
         actions: [
           TextButton(
             onPressed: () {
-              // call the create animal method
-              firestoreService.createAnimal(
-                _imageUrlController.text,
-                _nameController.text,
-                DateTime.now(),
-              );
+              if(docID == null) {
+                // call the create animal method
+                firestoreService.createAnimal(
+                  _imageUrlController.text,
+                  _nameController.text,
+                  DateTime.now() as Timestamp,
+                );
+              } else {
+                firestoreService.updateAnimal(
+                  docID,
+                  _imageUrlController.text,
+                  _nameController.text,
+                  DateTime.now() as Timestamp,
+                );
+              }
               // clear the text fields
               _imageUrlController.clear();
               _nameController.clear();
@@ -97,12 +108,18 @@ class _MainScreenPageState extends State<MainScreenPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           if (_currentIndex == 1) {
-            // open a modal to create a new animal
-            openAnimalModal();
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const AnimalsPageScreenCreate(),
+              ),
+            );
           } else if (_currentIndex == 2) {
             // open a modal to create a new vet
+
           } else if (_currentIndex == 3) {
             // open a modal to create a new reminder
+
           } else {
             // redirect to home page
             setState(() {
@@ -147,5 +164,3 @@ class _MainScreenPageState extends State<MainScreenPage> {
     );
   }
 }
-
-

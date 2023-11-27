@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../styles/font.dart';
 import '../../styles/spacings.dart';
 import '../../widgets/services/firestore.dart';
+import '../animals/create_screen.dart';
 import 'template_screen.dart';
 
 class AnimalsPageScreen extends StatelessWidget {
@@ -33,6 +34,7 @@ class AnimalsPageScreen extends StatelessWidget {
                     // if I have data -> get all the documents
                     if (snapshot.hasData) {
                       List animalsList = snapshot.data!.docs;
+                      // String docID = document.id;
 
                       // display as a list
                       return ListView.builder(
@@ -40,6 +42,7 @@ class AnimalsPageScreen extends StatelessWidget {
                         itemBuilder: (context, index) {
                           // get each animal document
                           DocumentSnapshot document = animalsList[index];
+                          String docID = document.id;
 
                           // get note from each document
                           Map<String, dynamic> data = document.data() as Map<String, dynamic>;
@@ -50,6 +53,30 @@ class AnimalsPageScreen extends StatelessWidget {
                           return ListTile(
                             // leading: Image.network(imageUrl),
                             title: Text(name),
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton(
+                                  icon: const Icon(Icons.edit),
+                                  onPressed: () {
+                                    // openAnimalModal(docID: docID);
+                                    // return another page with the animal data
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => const AnimalsPageScreenCreate(),
+                                      ),
+                                    );
+                                  },
+                                ),
+                                IconButton(
+                                  icon: const Icon(Icons.delete),
+                                  onPressed: () {
+                                    firestoreService.deleteAnimal(docID);
+                                  },
+                                ),
+                              ],
+                            )
                           );
                         },
                       );
