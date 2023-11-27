@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pet4life/widgets/services/firestore.dart';
 
 import '../styles/colors.dart';
 import 'main/animals_screen.dart';
@@ -19,16 +20,74 @@ class _MainScreenPageState extends State<MainScreenPage> {
 
   final List _pages = [
      const HomePageScreen(),
-     const AnimalsPageScreen(),
+     AnimalsPageScreen(),
      const VetsPageScreen(),
      const RemindersPageScreen(),
      const SettingsPageScreen(),
   ];
 
+  final FirestoreService firestoreService = FirestoreService();
+
+  final TextEditingController _imageUrlController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  // final TextEditingController _dobController = TextEditingController();
+  // final TextEditingController _weightController = TextEditingController();
+  // final TextEditingController _genderController = TextEditingController();
+  // final TextEditingController _raceController = TextEditingController();
+  // final TextEditingController _vaccinationController = TextEditingController();
+
   void _onItemTapped(int index) {
     setState(() {
       _currentIndex = index;
     });
+  }
+
+  void openAnimalModal() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text('Ajouter un animal'),
+
+            TextField(
+              controller: _imageUrlController,
+              decoration: const InputDecoration(
+                labelText: 'Choisissez une image',
+              ),
+            ),
+
+            TextField(
+              controller: _nameController,
+              decoration: const InputDecoration(
+                labelText: 'Nom de votre animal',
+              ),
+            ),
+          ],
+        ),
+        // action to save
+        actions: [
+          TextButton(
+            onPressed: () {
+              // call the create animal method
+              firestoreService.createAnimal(
+                _imageUrlController.text,
+                _nameController.text,
+                DateTime.now(),
+              );
+              // clear the text fields
+              _imageUrlController.clear();
+              _nameController.clear();
+
+              // close the modal
+              Navigator.pop(context);
+            },
+            child: const Text('Ajouter'),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -39,31 +98,16 @@ class _MainScreenPageState extends State<MainScreenPage> {
         onPressed: () {
           if (_currentIndex == 1) {
             // open a modal to create a new animal
-            showDialog(
-              context: context,
-              builder: (BuildContext context) => const AlertDialog(
-                content: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    TextField(
-                      decoration: InputDecoration(
-                        labelText: 'Nom',
-                      ),
-                    ),
-                    TextField(
-                      decoration: InputDecoration(
-                        labelText: 'Description',
-                      ),
-                    ),
-                    TextField(
-                      decoration: InputDecoration(
-                        labelText: 'Image',
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
+            openAnimalModal();
+          } else if (_currentIndex == 2) {
+            // open a modal to create a new vet
+          } else if (_currentIndex == 3) {
+            // open a modal to create a new reminder
+          } else {
+            // redirect to home page
+            setState(() {
+              _currentIndex = 0;
+            });
           }
         },
         backgroundColor: kMainColor,

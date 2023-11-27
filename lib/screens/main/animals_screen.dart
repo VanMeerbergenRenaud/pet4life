@@ -1,61 +1,64 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../styles/font.dart';
 import '../../styles/spacings.dart';
+import '../../widgets/services/firestore.dart';
 import 'template_screen.dart';
 
-class AnimalsPageScreen extends StatefulWidget {
-  const AnimalsPageScreen({super.key});
+class AnimalsPageScreen extends StatelessWidget {
+  AnimalsPageScreen({super.key});
 
   static const String routeName = '/animals';
 
-  @override
-  State<AnimalsPageScreen> createState() => _AnimalsPageScreenState();
-}
-
-class _AnimalsPageScreenState extends State<AnimalsPageScreen> {
-  // open a modal to create a new animal
-  void openAnimalModal() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => const AlertDialog(
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Nom',
-              ),
-            ),
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Description',
-              ),
-            ),
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Image',
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  final FirestoreService firestoreService = FirestoreService();
 
   @override
   Widget build(BuildContext context) {
-    return const HomePageTemplate(
-      title: Text(
+    return HomePageTemplate(
+      title: const Text(
         'Vos animaux',
         textAlign: TextAlign.center,
         style: kTitleStyleWhite,
       ),
       flexibleContent: Padding(
-          padding: EdgeInsets.all(kPadding),
+          padding: const EdgeInsets.all(kPadding),
           child: Column(
             children: [
-              Text('Hello'),
+              // stream of animals
+              Expanded(
+                child: StreamBuilder<QuerySnapshot>(
+                  stream: firestoreService.getAnimals(),
+                  builder: (context, snapshot) {
+                    // if I have data -> get all the documents
+                    if (snapshot.hasData) {
+                      List animalsList = snapshot.data!.docs;
+
+                      // display as a list
+                      return ListView.builder(
+                        itemCount: animalsList.length,
+                        itemBuilder: (context, index) {
+                          // get each animal document
+                          DocumentSnapshot document = animalsList[index];
+
+                          // get note from each document
+                          Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+                          String imageUrl = data['imageUrl'];
+                          String name = data['name'];
+
+                          // display as a list tile with name and image
+                          return ListTile(
+                            // leading: Image.network(imageUrl),
+                            title: Text(name),
+                          );
+                        },
+                      );
+                    } else {
+                      return const Text('no animals yet');
+                    }
+                  },
+                ),
+              )
             ],
           )
       ),
