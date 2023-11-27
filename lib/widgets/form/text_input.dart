@@ -47,7 +47,7 @@ class TextInput extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-            padding: const EdgeInsets.only(left: kHorizontalPadding),
+            padding: const EdgeInsets.only(left: kHorizontalPadding, bottom: kVerticalPaddingS),
             child: Text(
               labelText,
               style: kLabelStyle,
@@ -68,7 +68,7 @@ class TextInput extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
             ),
             filled: true,
-            fillColor: kBackgroundColor,
+            fillColor: kWhite,
             floatingLabelBehavior: FloatingLabelBehavior.always,
             hintText: hintText,
             errorStyle: kErrorStyle,

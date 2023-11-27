@@ -20,6 +20,12 @@ const kText = TextStyle(
   color: kBlack,
 );
 
+const kSmallTextGray = TextStyle(
+  fontSize: 12,
+  fontWeight: FontWeight.w400,
+  color: Color.fromARGB(255, 144, 144, 144),
+);
+
 const kItalicText = TextStyle(
   fontSize: 19,
   fontWeight: FontWeight.w500,

@@ -11,11 +11,12 @@ class RemindersPageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const HomePageTemplate(
-        title: Text(
-          'Vos rappels',
-          textAlign: TextAlign.center,
-          style: kTitleStyleWhite,
-        ),
-        flexibleContent: Text('Reminders'));
+      title: Text(
+        'Vos rappels',
+        textAlign: TextAlign.center,
+        style: kTitleStyleWhite,
+      ),
+      flexibleContent: Text('Reminders'),
+    );
   }
 }

@@ -16,7 +16,7 @@ class VetsPageScreen extends StatelessWidget {
           textAlign: TextAlign.center,
           style: kTitleStyleWhite,
         ),
-        flexibleContent: Text('Vets')
+        flexibleContent: Text('Vets'),
     );
   }
 }

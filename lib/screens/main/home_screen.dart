@@ -16,7 +16,7 @@ class HomePageScreen extends StatelessWidget {
 
     return HomePageTemplate(
       title: Text(
-        'Bienvenue $username',
+        'Bienvenue $username !',
         textAlign: TextAlign.left,
         style: kTitleStyleWhite,
       ),

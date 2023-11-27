@@ -35,6 +35,40 @@ class _MainScreenPageState extends State<MainScreenPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _pages[_currentIndex],
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          if (_currentIndex == 1) {
+            // open a modal to create a new animal
+            showDialog(
+              context: context,
+              builder: (BuildContext context) => const AlertDialog(
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    TextField(
+                      decoration: InputDecoration(
+                        labelText: 'Nom',
+                      ),
+                    ),
+                    TextField(
+                      decoration: InputDecoration(
+                        labelText: 'Description',
+                      ),
+                    ),
+                    TextField(
+                      decoration: InputDecoration(
+                        labelText: 'Image',
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }
+        },
+        backgroundColor: kMainColor,
+        child: const Icon(Icons.add),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         // type: BottomNavigationBarType.fixed,
         selectedItemColor: kMainColor,

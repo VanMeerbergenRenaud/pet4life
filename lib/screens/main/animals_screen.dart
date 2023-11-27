@@ -2,53 +2,62 @@ import 'package:flutter/material.dart';
 
 import '../../styles/font.dart';
 import '../../styles/spacings.dart';
-import '../../widgets/card.dart' as my_card;
 import 'template_screen.dart';
 
-class AnimalsPageScreen extends StatelessWidget {
+class AnimalsPageScreen extends StatefulWidget {
   const AnimalsPageScreen({super.key});
 
   static const String routeName = '/animals';
 
   @override
+  State<AnimalsPageScreen> createState() => _AnimalsPageScreenState();
+}
+
+class _AnimalsPageScreenState extends State<AnimalsPageScreen> {
+  // open a modal to create a new animal
+  void openAnimalModal() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => const AlertDialog(
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              decoration: InputDecoration(
+                labelText: 'Nom',
+              ),
+            ),
+            TextField(
+              decoration: InputDecoration(
+                labelText: 'Description',
+              ),
+            ),
+            TextField(
+              decoration: InputDecoration(
+                labelText: 'Image',
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return HomePageTemplate(
-      title: const Text(
+    return const HomePageTemplate(
+      title: Text(
         'Vos animaux',
         textAlign: TextAlign.center,
         style: kTitleStyleWhite,
       ),
       flexibleContent: Padding(
-        padding: const EdgeInsets.all(kPadding),
-        child: GridView.count(
-          crossAxisCount: 2,
-          crossAxisSpacing: kHorizontalPadding,
-          mainAxisSpacing: kHorizontalPadding,
-          children: List.generate(
-            10,
-            (index) {
-              return const my_card.Card(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircleAvatar(
-                      radius: 50,
-                      backgroundImage:
-                          NetworkImage('https://via.placeholder.com/150'),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(kPaddingS),
-                      child: Text(
-                        'Dog',
-                        style: kTitleStyle,
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
-        ),
+          padding: EdgeInsets.all(kPadding),
+          child: Column(
+            children: [
+              Text('Hello'),
+            ],
+          )
       ),
     );
   }

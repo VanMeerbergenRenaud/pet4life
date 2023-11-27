@@ -19,7 +19,7 @@ class SettingsPageScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return HomePageTemplate(
       title: const Text(
-        'Paramètres',
+        'Réglages',
         textAlign: TextAlign.center,
         style: kTitleStyleWhite,
       ),
@@ -36,7 +36,7 @@ class SettingsPageScreen extends StatelessWidget {
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => const ProfilScreen(),
+                          builder: (context) => ProfilScreen(),
                         ),
                       );
                     },
