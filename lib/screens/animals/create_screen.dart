@@ -21,15 +21,14 @@ class AnimalsPageScreenCreate extends StatefulWidget {
 }
 
 class _AnimalsPageScreenCreateState extends State<AnimalsPageScreenCreate> {
-  String _gender = 'mâle';
-
   final FirestoreService firestoreService = FirestoreService();
 
   final TextEditingController _imageUrlController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _dobController = TextEditingController();
+  final TextEditingController _dobController = TextEditingController(); // not still add in firestore
 
   String? docID;
+  String _gender = 'mâle';
 
   /*Future<void> _pickImage() async {
     final ImagePicker picker = ImagePicker();
@@ -49,7 +48,7 @@ class _AnimalsPageScreenCreateState extends State<AnimalsPageScreenCreate> {
         title: const Text('Créer un animal'),
       ),
       body: SingleChildScrollView(
-        // Data from the animal
+        // Data of the animal
         child: Padding(
           padding: const EdgeInsets.all(kPadding),
           child: Column(
@@ -63,19 +62,17 @@ class _AnimalsPageScreenCreateState extends State<AnimalsPageScreenCreate> {
                     GestureDetector(
                       // onTap: _pickImage,
                       child: CircleAvatar(
-                        radius: 65.0,
+                        radius: 55.0,
                         backgroundColor: kSecondaryColor,
                         backgroundImage: _imageUrlController.text.isEmpty
-                            ? const NetworkImage(
-                                'https://www.woolha.com/media/2020/03/eevee.png')
-                            : FileImage(File(_imageUrlController.text))
-                                as ImageProvider,
+                            ? const NetworkImage('https://www.woolha.com/media/2020/03/eevee.png')
+                            : FileImage(File(_imageUrlController.text)) as ImageProvider,
                       ),
                     ),
                     const Padding(
                       padding: EdgeInsets.all(kPaddingS),
                       child: Text(
-                        'Ajouter un animal',
+                        'Ajouter une photo',
                         textAlign: TextAlign.center,
                         style: kLabelStyle,
                       ),

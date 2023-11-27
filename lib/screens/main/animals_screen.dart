@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import '../../styles/font.dart';
 import '../../styles/spacings.dart';
 import '../../widgets/services/firestore.dart';
-import '../animals/create_screen.dart';
+import '../../widgets/card.dart' as my_card;
+import '../animals/profil_screen.dart';
 import 'template_screen.dart';
 
 class AnimalsPageScreen extends StatelessWidget {
@@ -23,71 +24,71 @@ class AnimalsPageScreen extends StatelessWidget {
         style: kTitleStyleWhite,
       ),
       flexibleContent: Padding(
-          padding: const EdgeInsets.all(kPadding),
-          child: Column(
-            children: [
-              // stream of animals
-              Expanded(
-                child: StreamBuilder<QuerySnapshot>(
-                  stream: firestoreService.getAnimals(),
-                  builder: (context, snapshot) {
-                    // if I have data -> get all the documents
-                    if (snapshot.hasData) {
-                      List animalsList = snapshot.data!.docs;
-                      // String docID = document.id;
+        padding: const EdgeInsets.all(kPadding),
+        child: Column(
+          children: [
+            // stream of animals
+            Expanded(
+              child: StreamBuilder<QuerySnapshot>(
+                stream: firestoreService.getAnimals(),
+                builder: (context, snapshot) {
+                  // if I have data -> get all the documents
+                  if (snapshot.hasData) {
+                    List animalsList = snapshot.data!.docs;
 
-                      // display as a list
-                      return ListView.builder(
-                        itemCount: animalsList.length,
-                        itemBuilder: (context, index) {
-                          // get each animal document
+                    // display as a grid
+                    return GridView.count(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: kHorizontalPadding,
+                      mainAxisSpacing: kHorizontalPadding,
+                      children: List.generate(
+                        animalsList.length,
+                            (index) {
                           DocumentSnapshot document = animalsList[index];
-                          String docID = document.id;
-
-                          // get note from each document
                           Map<String, dynamic> data = document.data() as Map<String, dynamic>;
                           String imageUrl = data['imageUrl'];
                           String name = data['name'];
 
-                          // display as a list tile with name and image
-                          return ListTile(
-                            // leading: Image.network(imageUrl),
-                            title: Text(name),
-                            trailing: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                IconButton(
-                                  icon: const Icon(Icons.edit),
-                                  onPressed: () {
-                                    // openAnimalModal(docID: docID);
-                                    // return another page with the animal data
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => const AnimalsPageScreenCreate(),
-                                      ),
-                                    );
-                                  },
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => PetProfileScreen(pet: document),
                                 ),
-                                IconButton(
-                                  icon: const Icon(Icons.delete),
-                                  onPressed: () {
-                                    firestoreService.deleteAnimal(docID);
-                                  },
-                                ),
-                              ],
-                            )
+                              );
+                            },
+                            child: my_card.Card(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  CircleAvatar(
+                                    radius: 50,
+                                    backgroundImage: NetworkImage(imageUrl),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(kPaddingS),
+                                    child: Text(
+                                      name,
+                                      style: kTitleStyle,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           );
                         },
-                      );
-                    } else {
-                      return const Text('no animals yet');
-                    }
-                  },
-                ),
-              )
-            ],
-          )
+                      ),
+                    );
+                    // if I don't have data -> display a message
+                  } else {
+                    return const Text('no animals yet');
+                  }
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
