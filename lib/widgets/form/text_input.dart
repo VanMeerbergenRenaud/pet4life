@@ -21,6 +21,7 @@ class TextInput extends StatelessWidget {
   final TextEditingController? controller;
 
   final FormFieldSetter<String>? onSaved;
+  final GestureTapCallback? onTap;
 
   const TextInput({
     super.key,
@@ -28,11 +29,10 @@ class TextInput extends StatelessWidget {
     required this.hintText,
     required this.labelText,
     required this.validator,
-
     this.keyboardType = TextInputType.text,
     this.obscureText = false,
     this.suffixIcon,
-
+    this.onTap,
     this.onChanged,
     this.initialValue,
     this.controller,
@@ -47,12 +47,14 @@ class TextInput extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-            padding: const EdgeInsets.only(left: kHorizontalPadding, bottom: kVerticalPaddingS),
+            padding: const EdgeInsets.only(
+                left: kHorizontalPadding, bottom: kVerticalPaddingS),
             child: Text(
               labelText,
               style: kLabelStyle,
             )),
         TextFormField(
+          onTap: onTap,
           keyboardType: keyboardType,
           obscureText: obscureText,
           validator: validator,
@@ -61,7 +63,8 @@ class TextInput extends StatelessWidget {
           controller: controller,
           decoration: InputDecoration(
             isDense: true,
-            contentPadding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding, vertical: kVerticalPadding),
+            contentPadding: const EdgeInsets.symmetric(
+                horizontal: kHorizontalPadding, vertical: kVerticalPadding),
             prefixIcon: Icon(prefixIcon),
             suffixIcon: suffixIcon,
             border: const OutlineInputBorder(

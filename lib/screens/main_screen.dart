@@ -1,8 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../styles/colors.dart';
-import '../widgets/services/firestore.dart';
 import 'animals/create_screen.dart';
 import 'main/animals_screen.dart';
 import 'main/home_screen.dart';
@@ -28,77 +26,10 @@ class _MainScreenPageState extends State<MainScreenPage> {
      const SettingsPageScreen(),
   ];
 
-  final FirestoreService firestoreService = FirestoreService();
-
-  final TextEditingController _imageUrlController = TextEditingController();
-  final TextEditingController _nameController = TextEditingController();
-  // final TextEditingController _dobController = TextEditingController();
-  // final TextEditingController _weightController = TextEditingController();
-  // final TextEditingController _genderController = TextEditingController();
-  // final TextEditingController _raceController = TextEditingController();
-  // final TextEditingController _vaccinationController = TextEditingController();
-
   void _onItemTapped(int index) {
     setState(() {
       _currentIndex = index;
     });
-  }
-
-  void openAnimalModal(String? docID) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text('Ajouter un animal'),
-
-            TextField(
-              controller: _imageUrlController,
-              decoration: const InputDecoration(
-                labelText: 'Choisissez une image',
-              ),
-            ),
-
-            TextField(
-              controller: _nameController,
-              decoration: const InputDecoration(
-                labelText: 'Nom de votre animal',
-              ),
-            ),
-          ],
-        ),
-        // action to save
-        actions: [
-          TextButton(
-            onPressed: () {
-              if(docID == null) {
-                // call the create animal method
-                firestoreService.createAnimal(
-                  _imageUrlController.text,
-                  _nameController.text,
-                  DateTime.now() as Timestamp,
-                );
-              } else {
-                firestoreService.updateAnimal(
-                  docID,
-                  _imageUrlController.text,
-                  _nameController.text,
-                  DateTime.now() as Timestamp,
-                );
-              }
-              // clear the text fields
-              _imageUrlController.clear();
-              _nameController.clear();
-
-              // close the modal
-              Navigator.pop(context);
-            },
-            child: const Text('Ajouter'),
-          ),
-        ],
-      ),
-    );
   }
 
   @override

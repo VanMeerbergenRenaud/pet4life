@@ -23,7 +23,7 @@ class SelectOption extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: optionValue == value ? kMainColor : kWhite,
+          color: optionValue == value ? kSecondaryColor : kWhite,
           borderRadius: BorderRadius.circular(10.0),
         ),
         child: Padding(

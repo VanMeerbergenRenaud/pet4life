@@ -1,8 +1,9 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-// import 'package:image_picker/image_picker.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../styles/colors.dart';
 import '../../styles/font.dart';
@@ -25,21 +26,36 @@ class _AnimalsPageScreenCreateState extends State<AnimalsPageScreenCreate> {
 
   final TextEditingController _imageUrlController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _dobController = TextEditingController(); // not still add in firestore
+  final TextEditingController _dobController = TextEditingController(); // TODO: add it in firestore as well
+  // final TextEditingController _weightController = TextEditingController();
+  // final TextEditingController _genderController = TextEditingController();
+  // final TextEditingController _raceController = TextEditingController();
+  // final TextEditingController _vaccinationController = TextEditingController();
+
+  DateTime date = DateTime(2016, 10, 26);
+
+  void _showDialog(Widget child) {
+    showCupertinoModalPopup<void>(
+      context: context,
+      builder: (BuildContext context) => Container(
+        height: 250,
+        padding: const EdgeInsets.only(top: 8.0),
+        margin: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
+        color: kTertiaryColor,
+        child: SafeArea(
+          top: false,
+          child: child,
+        ),
+      ),
+    );
+  }
 
   String? docID;
   String _gender = 'mâle';
-
-  /*Future<void> _pickImage() async {
-    final ImagePicker picker = ImagePicker();
-    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-
-    if (image != null) {
-      setState(() {
-        _imageUrlController.text = image.path;
-      });
-    }
-  }*/
+  String _race = 'golden';
+  String _vaccinated = 'vacciné';
 
   @override
   Widget build(BuildContext context) {
@@ -99,6 +115,18 @@ class _AnimalsPageScreenCreateState extends State<AnimalsPageScreenCreate> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: kPadding),
                 child: TextInput(
+                  onTap: ()=>{
+                    _showDialog(
+                      CupertinoDatePicker(
+                        initialDateTime: date,
+                        mode: CupertinoDatePickerMode.date,
+                        use24hFormat: true,
+                        onDateTimeChanged: (DateTime newTime) {
+                          setState(() => date = newTime);
+                        },
+                      ),
+                    )
+                  },
                   prefixIcon: Icons.calendar_today,
                   hintText: 'jj/mm/aaaa',
                   labelText: 'Date de naissance',
@@ -130,8 +158,7 @@ class _AnimalsPageScreenCreateState extends State<AnimalsPageScreenCreate> {
 
               // Select the gender
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: kVerticalPaddingL),
+                padding: const EdgeInsets.symmetric(vertical: kVerticalPaddingL),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -180,8 +207,101 @@ class _AnimalsPageScreenCreateState extends State<AnimalsPageScreenCreate> {
               ),
 
               // Select the race
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Race',
+                    style: kLabelStyle,
+                  ),
+                  const SizedBox(height: 8.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      SelectOption(
+                        label: 'Golden',
+                        value: 'golden',
+                        optionValue: _race,
+                        onTap: () {
+                          setState(() {
+                            _race = 'golden';
+                          });
+                        },
+                      ),
+                      SelectOption(
+                        label: 'Mixte',
+                        value: 'mixte',
+                        optionValue: _race,
+                        onTap: () {
+                          setState(() {
+                            _race = 'mixte';
+                          });
+                        },
+                      ),
+                      SelectOption(
+                        label: 'Inconnu',
+                        value: 'inconnu',
+                        optionValue: _race,
+                        onTap: () {
+                          setState(() {
+                            _race = 'inconnu';
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
 
-              // Select the vaccination - padding
+              // Select the vaccination
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: kVerticalPaddingL),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Vaccination',
+                      style: kLabelStyle,
+                    ),
+                    const SizedBox(height: 8.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        SelectOption(
+                          label: 'Vacciné',
+                          value: 'vacciné',
+                          optionValue: _vaccinated,
+                          onTap: () {
+                            setState(() {
+                              _vaccinated = 'vacciné';
+                            });
+                          },
+                        ),
+                        SelectOption(
+                          label: 'Non',
+                          value: 'non vacciné',
+                          optionValue: _vaccinated,
+                          onTap: () {
+                            setState(() {
+                              _vaccinated = 'non vacciné';
+                            });
+                          },
+                        ),
+                        SelectOption(
+                          label: 'Inconnu',
+                          value: 'inconnu',
+                          optionValue: _vaccinated,
+                          onTap: () {
+                            setState(() {
+                              _vaccinated = 'inconnu';
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
 
               // Button to save
               Padding(
@@ -212,6 +332,9 @@ class _AnimalsPageScreenCreateState extends State<AnimalsPageScreenCreate> {
                   },
                   label: 'Créer l‘animal',
                 ),
+              ),
+              const SizedBox(
+                height: kVerticalPaddingL,
               )
             ],
           ),

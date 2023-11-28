@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+// async -> ne fait pas la même chose en même temps, cette fonction prend du temps
+
 class FirestoreService {
   // get collection of animals
   final CollectionReference animalsCollection = FirebaseFirestore.instance.collection('animals');
 
   // CREATE animal
-  Future<void> createAnimal(String name, String imageUrl, Timestamp createdAt) {
+  Future<dynamic> createAnimal(String imageUrl, String name, Timestamp createdAt) {
     return animalsCollection.add({
       'imageUrl': imageUrl,
       'name': name,
@@ -20,7 +22,7 @@ class FirestoreService {
   }
 
   // UPDATE animal
-  Future<void> updateAnimal(String docID, String newName, String newImageUrl, Timestamp newCreatedAt) {
+  Future<dynamic> updateAnimal(String docID, String newImageUrl, String newName, Timestamp newCreatedAt) {
     return animalsCollection.doc(docID).update({
       'imageUrl': newImageUrl,
       'name': newName,
