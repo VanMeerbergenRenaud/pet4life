@@ -18,8 +18,7 @@ class AnimalsPageScreenCreate extends StatefulWidget {
   const AnimalsPageScreenCreate({super.key});
 
   @override
-  State<AnimalsPageScreenCreate> createState() =>
-      _AnimalsPageScreenCreateState();
+  State<AnimalsPageScreenCreate> createState() => _AnimalsPageScreenCreateState();
 }
 
 class _AnimalsPageScreenCreateState extends State<AnimalsPageScreenCreate> {

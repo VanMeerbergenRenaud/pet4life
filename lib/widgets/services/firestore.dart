@@ -28,10 +28,16 @@ class FirestoreService {
     });
   }
 
-  // READ animal
+  // READ animals
   Stream<QuerySnapshot> getAnimals() {
     final animals = animalsCollection.orderBy('createdAt', descending: true).snapshots();
     return animals;
+  }
+
+  // READ animal
+  Future<DocumentSnapshot> getAnimal(String docID) {
+    final animal = animalsCollection.doc(docID).get();
+    return animal;
   }
 
   // UPDATE animal

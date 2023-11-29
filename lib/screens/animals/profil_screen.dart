@@ -1,14 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:pet4life/styles/font.dart';
 
 import '../../widgets/services/firestore.dart';
+import '../main_screen.dart';
 import 'create_screen.dart';
 
 class PetProfileScreen extends StatefulWidget {
-  final DocumentSnapshot pet;
+  final String docID;
 
-  const PetProfileScreen({super.key, required this.pet});
+  const PetProfileScreen({required this.docID, super.key});
 
   @override
   State<PetProfileScreen> createState() => _PetProfileScreenState();
@@ -17,42 +17,72 @@ class PetProfileScreen extends StatefulWidget {
 class _PetProfileScreenState extends State<PetProfileScreen> {
   final FirestoreService firestoreService = FirestoreService();
 
-  late String docID;
+  late Future<DocumentSnapshot> futureAnimal;
+
+  @override
+  void initState() {
+    super.initState();
+    futureAnimal = firestoreService.getAnimal(widget.docID);
+  }
 
   @override
   Widget build(BuildContext context) {
-    // Build your pet profile screen here
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profil de l‘animal'),
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Profil de ${widget.pet['name']}',
-            style: kLabelStyle,
-          ),
-          IconButton(
-            icon: const Icon(Icons.edit),
-            onPressed: () {
-              // return another page with the animal data (docID)
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const AnimalsPageScreenCreate(),
+    return FutureBuilder<DocumentSnapshot>(
+      future: futureAnimal,
+      builder: (context, snapshot) {
+        var animalData = snapshot.data!.data() as Map<String, dynamic>;
+
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator();
+        } else if (snapshot.hasError) {
+          return const Center(child: Text('Il y a une erreur'));
+        } else {
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('Profil de l‘animal'),
+            ),
+            body: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Name: ${animalData['name']}'),
+                    Text('Date of Birth: ${animalData['dob']}'),
+                    Text('Weight: ${animalData['weight']} kg'),
+                    Text('Gender: ${animalData['gender']}'),
+                    Text('Race: ${animalData['race']}'),
+                    Text('Vaccination: ${animalData['vaccinated']}'),
+                  ],
                 ),
-              );
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.delete),
-            onPressed: () {
-              firestoreService.deleteAnimal(docID);
-            },
-          ),
-        ],
-      ),
+                IconButton(
+                  icon: const Icon(Icons.edit),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const AnimalsPageScreenCreate(),
+                      ),
+                    );
+                  },
+                ),
+                IconButton(
+                  icon: const Icon(Icons.delete),
+                  onPressed: () async {
+                    await firestoreService.deleteAnimal(widget.docID);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const MainScreenPage(),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+          );
+        }
+      },
     );
   }
 }

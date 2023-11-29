@@ -13,18 +13,6 @@ class ProfilScreen extends StatelessWidget {
 
   final _formKey = GlobalKey<FormState>();
 
-  /*final ImagePicker _picker = ImagePicker();
-  late File selectedImage;
-  getImage(ImageSource source) async {
-    final XFile? image = await _picker.pickImage(source: source);
-  }
-
-  if(image!= null) {
-    selectedImage = File(image.path);
-    setState(() {
-
-    });*/
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
