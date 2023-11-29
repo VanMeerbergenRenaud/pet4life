@@ -3,7 +3,8 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
+// import 'package:image_picker/image_picker.dart';
 
 import '../../styles/colors.dart';
 import '../../styles/font.dart';
@@ -26,11 +27,8 @@ class _AnimalsPageScreenCreateState extends State<AnimalsPageScreenCreate> {
 
   final TextEditingController _imageUrlController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _dobController = TextEditingController(); // TODO: add it in firestore as well
-  // final TextEditingController _weightController = TextEditingController();
-  // final TextEditingController _genderController = TextEditingController();
-  // final TextEditingController _raceController = TextEditingController();
-  // final TextEditingController _vaccinationController = TextEditingController();
+  final TextEditingController _dobController = TextEditingController();
+  final TextEditingController _weightController = TextEditingController();
 
   DateTime date = DateTime(2016, 10, 26);
 
@@ -81,8 +79,10 @@ class _AnimalsPageScreenCreateState extends State<AnimalsPageScreenCreate> {
                         radius: 55.0,
                         backgroundColor: kSecondaryColor,
                         backgroundImage: _imageUrlController.text.isEmpty
-                            ? const NetworkImage('https://www.woolha.com/media/2020/03/eevee.png')
-                            : FileImage(File(_imageUrlController.text)) as ImageProvider,
+                            ? const NetworkImage(
+                                'https://www.woolha.com/media/2020/03/eevee.png')
+                            : FileImage(File(_imageUrlController.text))
+                                as ImageProvider,
                       ),
                     ),
                     const Padding(
@@ -115,17 +115,20 @@ class _AnimalsPageScreenCreateState extends State<AnimalsPageScreenCreate> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: kPadding),
                 child: TextInput(
-                  onTap: ()=>{
+                  onTap: () => {
                     _showDialog(
                       CupertinoDatePicker(
                         initialDateTime: date,
                         mode: CupertinoDatePickerMode.date,
                         use24hFormat: true,
                         onDateTimeChanged: (DateTime newTime) {
-                          setState(() => date = newTime);
+                          setState(() {
+                            date = newTime;
+                            _dobController.text = DateFormat('dd/MM/yyyy').format(date);
+                          });
                         },
                       ),
-                    )
+                    ),
                   },
                   prefixIcon: Icons.calendar_today,
                   hintText: 'jj/mm/aaaa',
@@ -144,21 +147,22 @@ class _AnimalsPageScreenCreateState extends State<AnimalsPageScreenCreate> {
               // Input for the weight
               TextInput(
                 prefixIcon: Icons.line_weight,
-                hintText: '3.5',
+                hintText: '0.0',
                 labelText: 'Poids (en kg)',
-                keyboardType:
-                    const TextInputType.numberWithOptions(decimal: true),
+                keyboardType: const TextInputType.numberWithOptions(decimal: true),
                 validator: (value) {
                   if (value!.isEmpty) {
                     return 'Veuillez entrer un poids';
                   }
                   return null;
                 },
+                controller: _weightController,
               ),
 
               // Select the gender
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: kVerticalPaddingL),
+                padding:
+                    const EdgeInsets.symmetric(vertical: kVerticalPaddingL),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -255,7 +259,8 @@ class _AnimalsPageScreenCreateState extends State<AnimalsPageScreenCreate> {
 
               // Select the vaccination
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: kVerticalPaddingL),
+                padding:
+                    const EdgeInsets.symmetric(vertical: kVerticalPaddingL),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -313,6 +318,11 @@ class _AnimalsPageScreenCreateState extends State<AnimalsPageScreenCreate> {
                       firestoreService.createAnimal(
                         _imageUrlController.text,
                         _nameController.text,
+                        _dobController.text,
+                        _weightController.text,
+                        _gender,
+                        _race,
+                        _vaccinated,
                         Timestamp.now(),
                       );
                     } else {
@@ -320,12 +330,19 @@ class _AnimalsPageScreenCreateState extends State<AnimalsPageScreenCreate> {
                         docID!,
                         _imageUrlController.text,
                         _nameController.text,
+                        _dobController.text,
+                        _weightController.text,
+                        _gender,
+                        _race,
+                        _vaccinated,
                         Timestamp.now(),
                       );
                     }
                     // clear the text fields
                     _imageUrlController.clear();
                     _nameController.clear();
+                    _dobController.clear();
+                    _weightController.clear();
 
                     // go to previous page
                     Navigator.pop(context);

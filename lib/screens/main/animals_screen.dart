@@ -62,7 +62,7 @@ class AnimalsPageScreen extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   const CircleAvatar(
-                                    radius: 25,//50
+                                    radius: 50,
                                     backgroundImage: NetworkImage('https://www.woolha.com/media/2020/03/eevee.png'),
                                   ),
                                   Padding(
@@ -72,12 +72,12 @@ class AnimalsPageScreen extends StatelessWidget {
                                       style: kTitleStyle,
                                     ),
                                   ),
-                                  IconButton(
+                                  /*IconButton(
                                     icon: const Icon(Icons.delete),
                                     onPressed: () {
                                       firestoreService.deleteAnimal(docID);
                                     },
-                                  ),
+                                  ),*/
                                 ],
                               ),
                             ),

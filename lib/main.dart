@@ -35,3 +35,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+// delete db if needed (from terminal) :
+// $ firebase firestore:delete --all-collections --project pet4life-2023-2024

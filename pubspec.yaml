@@ -36,6 +36,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_svg: ^2.0.9
+  intl: ^0.17.0
   image_picker: ^1.0.4
   dto:
     path: ../dto
