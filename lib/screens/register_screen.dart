@@ -25,12 +25,45 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _registerFormKey = GlobalKey<FormState>();
 
   final _nameController = TextEditingController();
-
   final _emailController = TextEditingController();
-
   final _passwordController = TextEditingController();
 
   String _password = '';
+
+  Future<void> _registerUser(BuildContext context) async {
+    if (_registerFormKey.currentState!.validate()) {
+      try {
+        UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailController.text,
+          password: _passwordController.text,
+        );
+
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(userCredential.user!.uid)
+            .set({
+          'name': _nameController.text,
+          'email': _emailController.text,
+          'password': _passwordController.text,
+        });
+
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const MainScreenPage()),
+        );
+      } on FirebaseAuthException catch (e) {
+        String message = e.code == 'weak-password'
+            ? 'Le mot de passe est trop faible.'
+            : 'Ce compte existe déjà avec cet email.';
+        _showSnackBar(context, message);
+      }
+    }
+  }
+
+  void _showSnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -123,43 +156,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   vertical: kVerticalPaddingL),
                               child: MainButton(
                                 label: 'S‘inscrire',
-                                onTap: () async {
-                                  if (_registerFormKey.currentState!
-                                      .validate()) {
-                                    try {
-                                      await FirebaseAuth.instance
-                                          .createUserWithEmailAndPassword(
-                                            email: _emailController.text,
-                                            password: _passwordController.text,
-                                          )
-                                          .then(
-                                            (value) => FirebaseFirestore
-                                                .instance
-                                                .collection('users')
-                                                .doc(FirebaseAuth
-                                                    .instance.currentUser!.uid)
-                                                .set({
-                                              'name': _nameController.text,
-                                              'email': _emailController.text,
-                                              'password': _passwordController.text,
-                                            }).then((value) =>
-                                                  Navigator.of(context).push(
-                                                    MaterialPageRoute(builder: (context) => const MainScreenPage(),
-                                                ),
-                                              ),
-                                            ),
-                                          );
-                                    } on FirebaseAuthException catch (e) {
-                                      if (e.code == 'weak-password') {
-                                        print('The password provided is too weak.');
-                                      } else if (e.code == 'email-already-in-use') {
-                                        print('The account already exists for that email.');
-                                      }
-                                    } catch (e) {
-                                      print(e);
-                                    }
-                                  }
-                                },
+                                onTap: () => _registerUser(context),
                               ),
                             ),
                           ),

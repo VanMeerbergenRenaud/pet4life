@@ -27,26 +27,25 @@ class LoginScreen extends StatelessWidget {
         email: _emailController.text,
         password: _passwordController.text,
       );
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Connexion réussie !'),
+      _showSnackBar(context, 'Connexion réussie !');
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) =>
+          const MainScreenPage(),
         ),
       );
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Aucun utilisateur trouvé pour cet email.'),
-          ),
-        );
-      } else if (e.code == 'wrong-password') {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Mot de passe incorrect.'),
-          ),
-        );
-      }
+      String message = e.code == 'user-not-found'
+          ? 'Aucun utilisateur trouvé pour cet email.'
+          : 'Mot de passe incorrect.';
+      _showSnackBar(context, message);
     }
+  }
+
+  void _showSnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
   }
 
   @override
@@ -132,11 +131,6 @@ class LoginScreen extends StatelessWidget {
                               onTap: () {
                                 if (_formKey.currentState!.validate()) {
                                   _signInWithEmailAndPassword(context);
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (context) => const MainScreenPage(),
-                                    ),
-                                  );
                                 }
                               },
                             ),
@@ -171,7 +165,8 @@ class LoginScreen extends StatelessWidget {
               ),
               // Not subscribe yet
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: kVerticalPaddingL),
+                padding:
+                    const EdgeInsets.symmetric(vertical: kVerticalPaddingL),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -187,7 +182,7 @@ class LoginScreen extends StatelessWidget {
                       onPressed: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => RegisterScreen(),
+                            builder: (context) => const RegisterScreen(),
                           ),
                         );
                       },
@@ -197,7 +192,8 @@ class LoginScreen extends StatelessWidget {
               ),
               // Add a link to the home page as a guest
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
