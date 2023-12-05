@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -14,15 +12,25 @@ import '../widgets/form/validation.dart';
 import 'login_screen.dart';
 import 'main_screen.dart';
 
-class RegisterScreen extends StatelessWidget {
-  RegisterScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   static const String routeName = '/register';
+
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
   final _registerFormKey = GlobalKey<FormState>();
 
-  final String _name = "";
-  final String _email = "";
-  String _password = "";
+  final _nameController = TextEditingController();
+
+  final _emailController = TextEditingController();
+
+  final _passwordController = TextEditingController();
+
+  String _password = '';
 
   @override
   Widget build(BuildContext context) {
@@ -58,13 +66,13 @@ class RegisterScreen extends StatelessWidget {
                           horizontal: kHorizontalPadding),
                       child: TextInput(
                         prefixIcon: Icons.person,
-                        hintText: 'Dominique',
-                        labelText: 'Prénom',
+                        hintText: 'Johnny',
+                        labelText: 'Votre prénom',
                         keyboardType: TextInputType.name,
                         validator: (value) {
-                          return validateName(value!, 'Prénom');
+                          return validateName(value!, 'prénom');
                         },
-                        // controller: _name,
+                        controller: _nameController,
                       ),
                     ),
                     // Email input
@@ -81,7 +89,7 @@ class RegisterScreen extends StatelessWidget {
                           return validateEmail(value!);
                         },
                         keyboardType: TextInputType.emailAddress,
-                        // controller: _email,
+                        controller: _emailController,
                       ),
                     ),
                     // Password input
@@ -98,7 +106,7 @@ class RegisterScreen extends StatelessWidget {
                         validator: (value) {
                           return validatePassword(value!);
                         },
-                        // controller: _password,
+                        controller: _passwordController,
                       ),
                     ),
                     // Password forgotten link
@@ -116,40 +124,46 @@ class RegisterScreen extends StatelessWidget {
                               child: MainButton(
                                 label: 'S‘inscrire',
                                 onTap: () async {
-                                  try {
-                                    await FirebaseAuth.instance
-                                        .createUserWithEmailAndPassword(
-                                            email:
-                                                "${Random().nextInt(100000)}@gmail.com",
-                                            password: "password")
-                                        .then(
-                                          (value) => FirebaseFirestore.instance
-                                              .collection('users')
-                                              .doc(FirebaseAuth
-                                                  .instance.currentUser!.uid)
-                                              .set(
-                                            {
-                                              'name': _name,
-                                              'email': _email,
-                                              'password': _password,
-                                            },
-                                          ).then(
-                                            (value) =>
-                                                Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const MainScreenPage(),
+                                  if (_registerFormKey.currentState!
+                                      .validate()) {
+                                    try {
+                                      await FirebaseAuth.instance
+                                          .createUserWithEmailAndPassword(
+                                              email: _emailController.text,
+                                              password:
+                                                  _passwordController.text)
+                                          .then(
+                                            (value) => FirebaseFirestore
+                                                .instance
+                                                .collection('users')
+                                                .doc(FirebaseAuth
+                                                    .instance.currentUser!.uid)
+                                                .set(
+                                              {
+                                                'name': _nameController.text,
+                                                'email': _emailController.text,
+                                                'password':
+                                                    _passwordController.text,
+                                              },
+                                            ).then(
+                                              (value) =>
+                                                  Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const MainScreenPage(),
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        );
-                                  } on FirebaseAuthException catch (e) {
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(SnackBar(
-                                      showCloseIcon: true,
-                                      duration: const Duration(seconds: 5),
-                                      content: Text(e.message!),
-                                    ));
+                                          );
+                                    } on FirebaseAuthException catch (e) {
+                                      if (e.code == 'weak-password') {
+                                        print('The password provided is too weak.');
+                                      } else if (e.code == 'email-already-in-use') {
+                                        print('The account already exists for that email.');
+                                      }
+                                    } catch (e) {
+                                      print(e);
+                                    }
                                   }
                                 },
                               ),

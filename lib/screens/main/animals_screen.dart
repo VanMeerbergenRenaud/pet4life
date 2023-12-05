@@ -75,14 +75,12 @@ class AnimalsPageScreen extends StatelessWidget {
                       crossAxisCount: 2,
                       crossAxisSpacing: kHorizontalPadding,
                       mainAxisSpacing: kHorizontalPadding,
-                      children: List.generate(
-                        animalsList.length,
-                        (index) {
+                      children: List.generate(animalsList.length, (index) {
                           DocumentSnapshot document = animalsList[index];
                           String docID = document.id;
-                          Map<String, dynamic> data =
-                              document.data() as Map<String, dynamic>;
-                          String imageUrl = data['imageUrl'];
+                          Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+
+                          // String imageUrl = data['imageUrl'];
                           String name = data['name'];
 
                           return GestureDetector(
@@ -101,8 +99,7 @@ class AnimalsPageScreen extends StatelessWidget {
                                 children: [
                                   const CircleAvatar(
                                     radius: 50,
-                                    backgroundImage: NetworkImage(
-                                        'https://www.woolha.com/media/2020/03/eevee.png'),
+                                    backgroundImage: NetworkImage('https://www.woolha.com/media/2020/03/eevee.png'),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(kPaddingS),
@@ -111,12 +108,6 @@ class AnimalsPageScreen extends StatelessWidget {
                                       style: kTitleStyle,
                                     ),
                                   ),
-                                  /*IconButton(
-                                    icon: const Icon(Icons.delete),
-                                    onPressed: () {
-                                      firestoreService.deleteAnimal(docID);
-                                    },
-                                  ),*/
                                 ],
                               ),
                             ),

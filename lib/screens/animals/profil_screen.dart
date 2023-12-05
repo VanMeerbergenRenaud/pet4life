@@ -30,13 +30,9 @@ class _PetProfileScreenState extends State<PetProfileScreen> {
     return FutureBuilder<DocumentSnapshot>(
       future: futureAnimal,
       builder: (context, snapshot) {
-        var animalData = snapshot.data!.data() as Map<String, dynamic>;
-
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
-        } else if (snapshot.hasError) {
-          return const Center(child: Text('Il y a une erreur'));
-        } else {
+        if (snapshot.hasData && snapshot.data != null) {
+          var animalData = snapshot.data!.data() as Map<String, dynamic>;
+          // rest of the code
           return Scaffold(
             appBar: AppBar(
               title: const Text('Profil de l‘animal'),
@@ -80,6 +76,10 @@ class _PetProfileScreenState extends State<PetProfileScreen> {
                 ),
               ],
             ),
+          );
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(),
           );
         }
       },
