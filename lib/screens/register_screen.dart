@@ -129,28 +129,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     try {
                                       await FirebaseAuth.instance
                                           .createUserWithEmailAndPassword(
-                                              email: _emailController.text,
-                                              password:
-                                                  _passwordController.text)
+                                            email: _emailController.text,
+                                            password: _passwordController.text,
+                                          )
                                           .then(
                                             (value) => FirebaseFirestore
                                                 .instance
                                                 .collection('users')
                                                 .doc(FirebaseAuth
                                                     .instance.currentUser!.uid)
-                                                .set(
-                                              {
-                                                'name': _nameController.text,
-                                                'email': _emailController.text,
-                                                'password':
-                                                    _passwordController.text,
-                                              },
-                                            ).then(
-                                              (value) =>
+                                                .set({
+                                              'name': _nameController.text,
+                                              'email': _emailController.text,
+                                              'password': _passwordController.text,
+                                            }).then((value) =>
                                                   Navigator.of(context).push(
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const MainScreenPage(),
+                                                    MaterialPageRoute(builder: (context) => const MainScreenPage(),
                                                 ),
                                               ),
                                             ),

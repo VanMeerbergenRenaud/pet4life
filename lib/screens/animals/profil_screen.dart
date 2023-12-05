@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dto/pet.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../widgets/services/firestore.dart';
@@ -8,14 +10,16 @@ import 'create_screen.dart';
 class PetProfileScreen extends StatefulWidget {
   final String docID;
 
-  const PetProfileScreen({required this.docID, super.key});
+  const PetProfileScreen({
+    required this.docID, super.key
+  });
 
   @override
   State<PetProfileScreen> createState() => _PetProfileScreenState();
 }
 
 class _PetProfileScreenState extends State<PetProfileScreen> {
-  final FirestoreService firestoreService = FirestoreService();
+  final FirestoreService firestoreService = FirestoreService('G6vTQaoxMAOih0n9RjSHNRe3Ewv2');
 
   late Future<DocumentSnapshot> futureAnimal;
 
@@ -31,8 +35,14 @@ class _PetProfileScreenState extends State<PetProfileScreen> {
       future: futureAnimal,
       builder: (context, snapshot) {
         if (snapshot.hasData && snapshot.data != null) {
-          var animalData = snapshot.data!.data() as Map<String, dynamic>;
-          // rest of the code
+          Pet data = snapshot.data!.data() as Pet;
+          String name = data.name;
+          String dob = data.dob.toString().substring(0, 10);
+          String weight = data.weight.toString();
+          String gender = data.gender.toString();
+          String race = data.race.toString();
+          String vaccination = data.vaccination.toString();
+
           return Scaffold(
             appBar: AppBar(
               title: const Text('Profil de l‘animal'),
@@ -43,12 +53,12 @@ class _PetProfileScreenState extends State<PetProfileScreen> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Name: ${animalData['name']}'),
-                    Text('Date of Birth: ${animalData['dob']}'),
-                    Text('Weight: ${animalData['weight']} kg'),
-                    Text('Gender: ${animalData['gender']}'),
-                    Text('Race: ${animalData['race']}'),
-                    Text('Vaccination: ${animalData['vaccinated']}'),
+                    Text('Name: $name'),
+                    Text('Date of Birth: $dob'),
+                    Text('Weight: $weight kg'),
+                    Text('Gender: $gender'),
+                    Text('Race: $race'),
+                    Text('Vaccination: $vaccination'),
                   ],
                 ),
                 IconButton(

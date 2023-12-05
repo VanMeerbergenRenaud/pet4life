@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dto/pet.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../styles/font.dart';
@@ -14,7 +16,7 @@ class AnimalsPageScreen extends StatelessWidget {
 
   static const String routeName = '/animals';
 
-  final FirestoreService firestoreService = FirestoreService();
+  final FirestoreService firestoreService = FirestoreService('G6vTQaoxMAOih0n9RjSHNRe3Ewv2');
 
   @override
   Widget build(BuildContext context) {
@@ -30,12 +32,12 @@ class AnimalsPageScreen extends StatelessWidget {
           children: [
             // stream of animals
             Expanded(
-              child: StreamBuilder<QuerySnapshot>(
+              child: StreamBuilder<QuerySnapshot<Pet>>(
                 stream: firestoreService.getAnimals(),
                 builder: (context, snapshot) {
                   // if I have data -> get all the documents
                   if (snapshot.hasData) {
-                    List animalsList = snapshot.data!.docs;
+                    List<DocumentSnapshot<Pet>> animalsList = snapshot.data!.docs;
 
                     // if I don't have data -> display a message
                     if (animalsList.isEmpty) {
@@ -76,12 +78,11 @@ class AnimalsPageScreen extends StatelessWidget {
                       crossAxisSpacing: kHorizontalPadding,
                       mainAxisSpacing: kHorizontalPadding,
                       children: List.generate(animalsList.length, (index) {
-                          DocumentSnapshot document = animalsList[index];
+                          DocumentSnapshot<Pet> document = animalsList[index];
                           String docID = document.id;
-                          Map<String, dynamic> data = document.data() as Map<String, dynamic>;
-
+                          Pet? data = document.data();
                           // String imageUrl = data['imageUrl'];
-                          String name = data['name'];
+                          String name = data!.name;
 
                           return GestureDetector(
                             onTap: () {

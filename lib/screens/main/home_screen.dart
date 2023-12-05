@@ -12,11 +12,11 @@ class HomePageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser;
-    final username = user?.displayName ?? 'invité'; //user?.email works
+    final userName = user?.displayName ?? 'Utilisateur';
 
     return HomePageTemplate(
       title: Text(
-        'Bienvenue $username !',
+        'Bienvenue $userName !',
         textAlign: TextAlign.left,
         style: kTitleStyleWhite,
       ),

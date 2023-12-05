@@ -25,7 +25,7 @@ class _MainScreenPageState extends State<MainScreenPage> {
 
   final List _pages = [
      const HomePageScreen(),
-     AnimalsPageScreen(),
+    AnimalsPageScreen(),
      const VetsPageScreen(),
      const RemindersPageScreen(),
      const SettingsPageScreen(),
