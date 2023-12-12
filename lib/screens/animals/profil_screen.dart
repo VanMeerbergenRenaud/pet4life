@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dto/pet.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../widgets/services/firestore.dart';
@@ -7,24 +8,25 @@ import '../main_screen.dart';
 import 'create_screen.dart';
 
 class PetProfileScreen extends StatefulWidget {
-  final String docID;
-
   const PetProfileScreen({
     required this.docID, super.key
   });
+
+  final String docID;
 
   @override
   State<PetProfileScreen> createState() => _PetProfileScreenState();
 }
 
 class _PetProfileScreenState extends State<PetProfileScreen> {
-  final FirestoreService firestoreService = FirestoreService('G6vTQaoxMAOih0n9RjSHNRe3Ewv2');
-
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  late FirestoreService firestoreService;
   late Future<DocumentSnapshot> futureAnimal;
 
   @override
   void initState() {
     super.initState();
+    firestoreService = FirestoreService(_auth.currentUser!.uid);
     futureAnimal = firestoreService.getAnimal(widget.docID);
   }
 

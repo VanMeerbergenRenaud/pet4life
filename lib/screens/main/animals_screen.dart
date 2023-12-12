@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dto/pet.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../styles/font.dart';
@@ -15,10 +16,12 @@ class AnimalsPageScreen extends StatelessWidget {
 
   static const String routeName = '/animals';
 
-  final FirestoreService firestoreService = FirestoreService('G6vTQaoxMAOih0n9RjSHNRe3Ewv2');
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
+    final FirestoreService firestoreService = FirestoreService(_auth.currentUser!.uid);
+
     return HomePageTemplate(
       title: const Text(
         'Vos animaux',

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dto/pet.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -29,8 +30,6 @@ class AnimalsPageScreenCreate extends StatefulWidget {
 }
 
 class _AnimalsPageScreenCreateState extends State<AnimalsPageScreenCreate> {
-  final FirestoreService firestoreService = FirestoreService('G6vTQaoxMAOih0n9RjSHNRe3Ewv2');
-
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _imageUrlController = TextEditingController();
@@ -63,8 +62,12 @@ class _AnimalsPageScreenCreateState extends State<AnimalsPageScreenCreate> {
   String _race = 'golden';
   String _vaccinated = 'vacciné';
 
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
+    final FirestoreService firestoreService = FirestoreService(_auth.currentUser!.uid);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Créer un animal'),
