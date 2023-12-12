@@ -52,9 +52,9 @@ class AnimalsPageScreen extends StatelessWidget {
                                 vertical: kVerticalPaddingL,
                               ),
                               child: Text(
-                                  'Vous n‘avez pas encore d‘animal.',
-                                  style: kTextDiverStyle,
-                                  textAlign: TextAlign.center,
+                                'Vous n‘avez pas encore d‘animal.',
+                                style: kTextDiverStyle,
+                                textAlign: TextAlign.center,
                               ),
                             ),
                             ElevatedButton(
@@ -62,8 +62,7 @@ class AnimalsPageScreen extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        const AnimalsPageScreenCreate(docID: '',),
+                                    builder: (context) => const AnimalsPageScreenCreate(docID: '',),
                                   ),
                                 );
                               },
@@ -80,42 +79,42 @@ class AnimalsPageScreen extends StatelessWidget {
                       crossAxisSpacing: kHorizontalPadding,
                       mainAxisSpacing: kHorizontalPadding,
                       children: List.generate(animalsList.length, (index) {
-                          DocumentSnapshot<Pet> document = animalsList[index];
-                          String docID = document.id;
-                          Pet? data = document.data();
-                          // String imageUrl = data['imageUrl'];
-                          String name = data!.name;
+                        DocumentSnapshot<Pet> document = animalsList[index];
+                        String docID = document.id;
+                        Pet? data = document.data();
+                        String imageUrl = data!.imageUrl;
+                        String name = data.name;
 
-                          return GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      PetProfileScreen(docID: docID),
-                                ),
-                              );
-                            },
-                            child: my_card.Card(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const CircleAvatar(
-                                    radius: 50,
-                                    backgroundImage: NetworkImage('https://www.woolha.com/media/2020/03/eevee.png'),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(kPaddingS),
-                                    child: Text(
-                                      name,
-                                      style: kTitleStyle,
-                                    ),
-                                  ),
-                                ],
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    PetProfileScreen(docID: docID),
                               ),
+                            );
+                          },
+                          child: my_card.Card(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                CircleAvatar(
+                                  radius: 50,
+                                  backgroundImage: NetworkImage(imageUrl),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(kPaddingS),
+                                  child: Text(
+                                    name,
+                                    style: kTitleStyle,
+                                  ),
+                                ),
+                              ],
                             ),
-                          );
-                        },
+                          ),
+                        );
+                      },
                       ),
                     );
                   } else {
