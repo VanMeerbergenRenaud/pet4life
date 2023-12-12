@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dto/pet.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../widgets/services/firestore.dart';
@@ -53,10 +52,10 @@ class _PetProfileScreenState extends State<PetProfileScreen> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Name: $name'),
-                    Text('Date of Birth: $dob'),
-                    Text('Weight: $weight kg'),
-                    Text('Gender: $gender'),
+                    Text('Nom: $name'),
+                    Text('Date de naissance: $dob'),
+                    Text('Poids: $weight kg'),
+                    Text('Genre: $gender'),
                     Text('Race: $race'),
                     Text('Vaccination: $vaccination'),
                   ],
@@ -67,7 +66,7 @@ class _PetProfileScreenState extends State<PetProfileScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const AnimalsPageScreenCreate(),
+                        builder: (context) => AnimalsPageScreenCreate(docID: widget.docID),
                       ),
                     );
                   },
@@ -75,13 +74,13 @@ class _PetProfileScreenState extends State<PetProfileScreen> {
                 IconButton(
                   icon: const Icon(Icons.delete),
                   onPressed: () async {
-                    await firestoreService.deleteAnimal(widget.docID);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => const MainScreenPage(),
                       ),
                     );
+                    await firestoreService.deleteAnimal(widget.docID);
                   },
                 ),
               ],

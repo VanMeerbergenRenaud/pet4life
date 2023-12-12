@@ -17,7 +17,12 @@ import '../../widgets/form/text_input.dart';
 import '../../widgets/services/firestore.dart';
 
 class AnimalsPageScreenCreate extends StatefulWidget {
-  const AnimalsPageScreenCreate({super.key});
+  const AnimalsPageScreenCreate({
+    super.key,
+    required this.docID,
+  });
+
+  final String docID;
 
   @override
   State<AnimalsPageScreenCreate> createState() => _AnimalsPageScreenCreateState();
@@ -84,8 +89,10 @@ class _AnimalsPageScreenCreateState extends State<AnimalsPageScreenCreate> {
                           radius: 55.0,
                           backgroundColor: kSecondaryColor,
                           backgroundImage: _imageUrlController.text.isEmpty
-                              ? const NetworkImage('https://www.woolha.com/media/2020/03/eevee.png')
-                              : FileImage(File(_imageUrlController.text)) as ImageProvider,
+                              ? const NetworkImage(
+                                  'https://www.woolha.com/media/2020/03/eevee.png')
+                              : FileImage(File(_imageUrlController.text))
+                                  as ImageProvider,
                         ),
                       ),
                       const Padding(
@@ -124,7 +131,8 @@ class _AnimalsPageScreenCreateState extends State<AnimalsPageScreenCreate> {
                           onDateTimeChanged: (DateTime newTime) {
                             setState(() {
                               date = newTime;
-                              _dobController.text = DateFormat('dd/MM/yyyy').format(date);
+                              _dobController.text =
+                                  DateFormat('dd/MM/yyyy').format(date);
                             });
                           },
                         ),
@@ -146,7 +154,8 @@ class _AnimalsPageScreenCreateState extends State<AnimalsPageScreenCreate> {
                   prefixIcon: Icons.line_weight,
                   hintText: '0.0',
                   labelText: 'Poids (en kg)',
-                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                  keyboardType:
+                      const TextInputType.numberWithOptions(decimal: true),
                   validator: (value) {
                     return validateWeight(value!);
                   },
@@ -313,7 +322,8 @@ class _AnimalsPageScreenCreateState extends State<AnimalsPageScreenCreate> {
                           Pet(
                             imageUrl: _imageUrlController.text,
                             name: _nameController.text,
-                            dob: DateFormat('dd/MM/yyyy').parse(_dobController.text),
+                            dob: DateFormat('dd/MM/yyyy')
+                                .parse(_dobController.text),
                             weight: double.parse(_weightController.text),
                             gender: _gender,
                             race: _race,

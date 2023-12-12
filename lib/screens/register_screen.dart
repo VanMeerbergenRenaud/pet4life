@@ -37,6 +37,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
           email: _emailController.text,
           password: _passwordController.text,
         );
+        // Update the displayName of the Firebase User
+        await userCredential.user!.updateProfile(displayName: _nameController.text);
 
         await FirebaseFirestore.instance
             .collection('users')

@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dto/pet.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../styles/font.dart';
@@ -61,7 +60,7 @@ class AnimalsPageScreen extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        const AnimalsPageScreenCreate(),
+                                        const AnimalsPageScreenCreate(docID: '',),
                                   ),
                                 );
                               },

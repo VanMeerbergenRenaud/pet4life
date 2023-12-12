@@ -11,8 +11,8 @@ class HomePageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser;
-    final userName = user?.displayName ?? '';
+    final user = FirebaseAuth.instance.currentUser?.displayName;
+    final userName = user ?? '';
 
     return HomePageTemplate(
       title: Text(

@@ -5,5 +5,5 @@ import 'screens/register_screen.dart';
 
 Map<String, WidgetBuilder> routes = {
   LoginScreen.routeName: (context) => LoginScreen(),
-  RegisterScreen.routeName: (context) => RegisterScreen(),
+  RegisterScreen.routeName: (context) => const RegisterScreen(),
 };

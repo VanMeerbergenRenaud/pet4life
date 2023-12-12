@@ -58,7 +58,7 @@ class _MainScreenPageState extends State<MainScreenPage> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const AnimalsPageScreenCreate(),
+                builder: (context) => const AnimalsPageScreenCreate(docID: '',),
               ),
             );
           } else if (_currentIndex == 2) {
