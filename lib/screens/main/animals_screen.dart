@@ -20,7 +20,8 @@ class AnimalsPageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FirestoreService firestoreService = FirestoreService(_auth.currentUser!.uid);
+    final FirestoreService firestoreService =
+        FirestoreService(_auth.currentUser!.uid);
 
     return HomePageTemplate(
       title: const Text(
@@ -39,7 +40,8 @@ class AnimalsPageScreen extends StatelessWidget {
                 builder: (context, snapshot) {
                   // if I have data -> get all the documents
                   if (snapshot.hasData) {
-                    List<DocumentSnapshot<Pet>> animalsList = snapshot.data!.docs;
+                    List<DocumentSnapshot<Pet>> animalsList =
+                        snapshot.data!.docs;
 
                     // if I don't have data -> display a message
                     if (animalsList.isEmpty) {
@@ -62,7 +64,10 @@ class AnimalsPageScreen extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => const AnimalsPageScreenCreate(docID: '',),
+                                    builder: (context) =>
+                                        const AnimalsPageScreenCreate(
+                                      docID: '',
+                                    ),
                                   ),
                                 );
                               },
@@ -78,43 +83,49 @@ class AnimalsPageScreen extends StatelessWidget {
                       crossAxisCount: 2,
                       crossAxisSpacing: kHorizontalPadding,
                       mainAxisSpacing: kHorizontalPadding,
-                      children: List.generate(animalsList.length, (index) {
-                        DocumentSnapshot<Pet> document = animalsList[index];
-                        String docID = document.id;
-                        Pet? data = document.data();
-                        String imageUrl = data!.imageUrl;
-                        String name = data.name;
+                      children: List.generate(
+                        animalsList.length,
+                        (index) {
+                          DocumentSnapshot<Pet> document = animalsList[index];
+                          String docID = document.id;
+                          Pet? data = document.data();
+                          String imageUrl = data!.imageUrl;
+                          String name = data.name;
 
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    PetProfileScreen(docID: docID),
-                              ),
-                            );
-                          },
-                          child: my_card.Card(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                CircleAvatar(
-                                  radius: 50,
-                                  backgroundImage: NetworkImage(imageUrl),
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      PetProfileScreen(docID: docID),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.all(kPaddingS),
-                                  child: Text(
-                                    name,
-                                    style: kTitleStyle,
+                              );
+                            },
+                            child: my_card.Card(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  CircleAvatar(
+                                    radius: 50,
+                                    backgroundImage: imageUrl != ''
+                                        ? NetworkImage(imageUrl)
+                                        : const AssetImage(
+                                            'assets/img/default.png',
+                                          ) as ImageProvider<Object>,
                                   ),
-                                ),
-                              ],
+                                  Padding(
+                                    padding: const EdgeInsets.all(kPaddingS),
+                                    child: Text(
+                                      name,
+                                      style: kTitleStyle,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        );
-                      },
+                          );
+                        },
                       ),
                     );
                   } else {

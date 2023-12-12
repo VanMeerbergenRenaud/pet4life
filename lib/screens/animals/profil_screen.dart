@@ -8,9 +8,7 @@ import '../main_screen.dart';
 import 'create_screen.dart';
 
 class PetProfileScreen extends StatefulWidget {
-  const PetProfileScreen({
-    required this.docID, super.key
-  });
+  const PetProfileScreen({required this.docID, super.key});
 
   final String docID;
 
@@ -38,6 +36,7 @@ class _PetProfileScreenState extends State<PetProfileScreen> {
         if (snapshot.hasData && snapshot.data != null) {
           Pet data = snapshot.data!.data() as Pet;
           String name = data.name;
+          String imageUrl = data.imageUrl.toString();
           String dob = data.dob.toString().substring(0, 10);
           String weight = data.weight.toString();
           String gender = data.gender.toString();
@@ -51,6 +50,20 @@ class _PetProfileScreenState extends State<PetProfileScreen> {
             body: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // image of the pet
+                imageUrl != ''
+                    ? Image.network(
+                        imageUrl,
+                        height: 250,
+                        width: MediaQuery.of(context).size.width,
+                        fit: BoxFit.cover,
+                      )
+                    : Image.asset(
+                        'assets/img/default.png',
+                        height: 250,
+                        width: MediaQuery.of(context).size.width,
+                        fit: BoxFit.cover,
+                      ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -68,7 +81,8 @@ class _PetProfileScreenState extends State<PetProfileScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => AnimalsPageScreenCreate(docID: widget.docID),
+                        builder: (context) =>
+                            AnimalsPageScreenCreate(docID: widget.docID),
                       ),
                     );
                   },

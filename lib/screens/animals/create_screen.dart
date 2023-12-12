@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dto/pet.dart';
@@ -7,7 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pet4life/widgets/form/validation.dart';
-// import 'package:image_picker/image_picker.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../styles/colors.dart';
 import '../../styles/font.dart';
@@ -15,6 +15,7 @@ import '../../styles/spacings.dart';
 import '../../widgets/buttons/main_button.dart';
 import '../../widgets/form/select_option.dart';
 import '../../widgets/form/text_input.dart';
+import '../../widgets/image_picker.dart';
 import '../../widgets/services/firestore.dart';
 
 class AnimalsPageScreenCreate extends StatefulWidget {
@@ -26,13 +27,13 @@ class AnimalsPageScreenCreate extends StatefulWidget {
   final String docID;
 
   @override
-  State<AnimalsPageScreenCreate> createState() => _AnimalsPageScreenCreateState();
+  State<AnimalsPageScreenCreate> createState() =>
+      _AnimalsPageScreenCreateState();
 }
 
 class _AnimalsPageScreenCreateState extends State<AnimalsPageScreenCreate> {
   final _formKey = GlobalKey<FormState>();
 
-  final TextEditingController _imageUrlController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _dobController = TextEditingController();
   final TextEditingController _weightController = TextEditingController();
@@ -64,9 +65,19 @@ class _AnimalsPageScreenCreateState extends State<AnimalsPageScreenCreate> {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
+  Uint8List? _image;
+
+  Future<void> selectImage() async {
+    Uint8List img = await pickImage(ImageSource.gallery);
+    setState(() {
+      _image = img;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    final FirestoreService firestoreService = FirestoreService(_auth.currentUser!.uid);
+    final FirestoreService firestoreService =
+        FirestoreService(_auth.currentUser!.uid);
 
     return Scaffold(
       appBar: AppBar(
@@ -86,18 +97,35 @@ class _AnimalsPageScreenCreateState extends State<AnimalsPageScreenCreate> {
                   padding: const EdgeInsets.symmetric(vertical: kPadding),
                   child: Column(
                     children: [
-                      GestureDetector(
-                        // onTap: _pickImage,
-                        child: CircleAvatar(
-                          radius: 55.0,
-                          backgroundColor: kSecondaryColor,
-                          backgroundImage: _imageUrlController.text.isEmpty
-                              ? const NetworkImage(
-                                  'https://www.woolha.com/media/2020/03/eevee.png')
-                              : FileImage(File(_imageUrlController.text))
-                                  as ImageProvider,
-                        ),
+                      // Image upload
+                      Stack(
+                        children: [
+                          _image != null
+                              ? GestureDetector(
+                                  onTap: () {
+                                    selectImage();
+                                  },
+                                  child: CircleAvatar(
+                                    radius: 55.0,
+                                    backgroundColor: kSecondaryColor,
+                                    backgroundImage: MemoryImage(_image!),
+                                  ),
+                                )
+                              : GestureDetector(
+                                  onTap: () {
+                                    selectImage();
+                                  },
+                                  child: const CircleAvatar(
+                                    radius: 55.0,
+                                    backgroundColor: kSecondaryColor,
+                                    backgroundImage: AssetImage(
+                                      'assets/img/default.png',
+                                    ),
+                                  ),
+                                ),
+                        ],
                       ),
+                      // Text to say add an image
                       const Padding(
                         padding: EdgeInsets.all(kPaddingS),
                         child: Text(
@@ -318,12 +346,13 @@ class _AnimalsPageScreenCreateState extends State<AnimalsPageScreenCreate> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: kPaddingS),
                   child: MainButton(
-                    onTap: () {
+                    onTap: () async {
                       // call the create animal method
                       if (docID == null && _formKey.currentState!.validate()) {
                         firestoreService.createAnimal(
                           Pet(
-                            imageUrl: _imageUrlController.text,
+                            imageUrl: await firestoreService
+                                .uploadImageToFirebase(_image!),
                             name: _nameController.text,
                             dob: DateFormat('dd/MM/yyyy')
                                 .parse(_dobController.text),
@@ -337,7 +366,7 @@ class _AnimalsPageScreenCreateState extends State<AnimalsPageScreenCreate> {
                       } else {
                         firestoreService.updateAnimal(
                           docID!,
-                          _imageUrlController.text,
+                          _image as String,
                           _nameController.text,
                           _dobController.text as DateTime,
                           _weightController.text as double,
@@ -347,7 +376,6 @@ class _AnimalsPageScreenCreateState extends State<AnimalsPageScreenCreate> {
                           Timestamp.now(),
                         );
                       }
-
                       // go to previous page
                       Navigator.pop(context);
                     },

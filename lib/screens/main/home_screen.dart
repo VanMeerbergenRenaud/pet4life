@@ -47,26 +47,31 @@ class HomePageScreen extends StatelessWidget {
                   height: 200,
                   child: Column(
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            'Mes animaux',
-                            style: kSectionTitle,
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      const AnimalsPageScreenCreate(docID: ''),
-                                ),
-                              );
-                            },
-                            child: const Icon(Icons.add),
-                          ),
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: kHorizontalPaddingS),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              'Mes animaux',
+                              style: kSectionTitle,
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const AnimalsPageScreenCreate(
+                                            docID: ''),
+                                  ),
+                                );
+                              },
+                              child: const Icon(Icons.add),
+                            ),
+                          ],
+                        ),
                       ),
                       const SizedBox(height: kVerticalPaddingS + 4),
                       Expanded(
@@ -82,43 +87,47 @@ class HomePageScreen extends StatelessWidget {
                                         'Ajouter un animal pour commencer'));
                               } else {
                                 return ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: petsList.length,
-                                    itemBuilder: (context, index) {
-                                      Pet pet = petsList[index].data()!;
-                                      return GestureDetector(
-                                        onTap: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) => PetProfileScreen(
-                                                  docID: petsList[index].id
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: kHorizontalPaddingS),
-                                          child: Column(
-                                            children: [
-                                              CircleAvatar(
-                                                radius: 48,
-                                                backgroundImage:
-                                                    NetworkImage(pet.imageUrl),
-                                              ),
-                                              const SizedBox(
-                                                  height: kVerticalPaddingS),
-                                              Text(
-                                                pet.name[0].toUpperCase() +
-                                                    pet.name.substring(1),
-                                                style: kLabelStyle,
-                                              ),
-                                            ],
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: petsList.length,
+                                  itemBuilder: (context, index) {
+                                    Pet pet = petsList[index].data()!;
+                                    return GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                PetProfileScreen(
+                                                    docID: petsList[index].id),
                                           ),
+                                        );
+                                      },
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: kHorizontalPaddingS),
+                                        child: Column(
+                                          children: [
+                                            CircleAvatar(
+                                              radius: 44,
+                                              backgroundImage: pet.imageUrl !=
+                                                      ''
+                                                  ? NetworkImage(pet.imageUrl)
+                                                  : const AssetImage(
+                                                          'assets/img/default.png')
+                                                      as ImageProvider,
+                                            ),
+                                            const SizedBox(
+                                                height: kVerticalPaddingS),
+                                            Text(
+                                              pet.name[0].toUpperCase() +
+                                                  pet.name.substring(1),
+                                              style: kLabelStyle,
+                                            ),
+                                          ],
                                         ),
-                                      );
-                                    },
+                                      ),
+                                    );
+                                  },
                                 );
                               }
                             } else {
