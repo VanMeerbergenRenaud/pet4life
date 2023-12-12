@@ -1,9 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
-import 'package:dto/user.dart' as dto_user;
-import 'package:dto/pet.dart' as dto_pet;
 
 import '../styles/colors.dart';
 import 'animals/create_screen.dart';
@@ -35,17 +30,6 @@ class _MainScreenPageState extends State<MainScreenPage> {
     setState(() {
       _currentIndex = index;
     });
-  }
-
-  late final Stream<DocumentSnapshot<dto_user.User>>? _userStream;
-  late final Stream<DocumentSnapshot<dto_pet.Pet>>? _petStream;
-
-  @override
-  void initState() {
-    super.initState();
-    if(FirebaseAuth.instance.currentUser != null) {
-
-    }
   }
 
   @override
