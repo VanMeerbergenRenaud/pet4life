@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet4life/screens/login_screen.dart';
+import 'package:pet4life/styles/colors.dart';
 import 'package:pet4life/styles/font.dart';
 import 'package:pet4life/widgets/buttons/main_button.dart';
 
@@ -46,6 +47,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     image: onboardData[index].image,
                     title: onboardData[index].title,
                     description: onboardData[index].description,
+                    currentIndex: index,
                     mainButtonLabel: index == onboardData.length - 1
                         ? "C’est parti !"
                         : "Suivant",
@@ -134,7 +136,7 @@ final List<Onboard> onboardData = [
 
 class OnBoardingContent extends StatelessWidget {
   const OnBoardingContent({
-    Key? key,
+    super.key,
     required this.image,
     required this.title,
     required this.description,
@@ -142,10 +144,10 @@ class OnBoardingContent extends StatelessWidget {
     required this.mainButtonOnTap,
     required this.textButtonLabel,
     required this.textButtonOnTap,
-  }) : super(key: key);
+    required this.currentIndex,
+  });
 
-  final String image, title, description, mainButtonLabel, textButtonLabel;
-  final VoidCallback mainButtonOnTap, textButtonOnTap;
+  final int currentIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -160,7 +162,25 @@ class OnBoardingContent extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
           ),
         ),
-        const SizedBox(height: 32),
+
+        // Dots
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            for (int i = 0; i < onboardData.length; i++)
+              if (i == currentIndex)
+                const Padding(
+                  padding: EdgeInsets.all(kPaddingS),
+                  child: DotIndicator(isActive: true),
+                )
+              else
+                const Padding(
+                  padding: EdgeInsets.all(kPaddingS),
+                  child: DotIndicator(isActive: false),
+                ),
+          ],
+        ),
+
         Text(
           title,
           style: kTitleStyle,
@@ -195,6 +215,31 @@ class OnBoardingContent extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  final String image, title, description, mainButtonLabel, textButtonLabel;
+
+  final VoidCallback mainButtonOnTap, textButtonOnTap;
+}
+
+class DotIndicator extends StatelessWidget {
+  const DotIndicator({
+    super.key,
+    this.isActive = false,
+  });
+
+  final bool isActive;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: isActive ? 10 : 8,
+      width: isActive ? 10 : 8,
+      decoration: BoxDecoration(
+        color: isActive ? kSecondaryColor : kGrey,
+        borderRadius: BorderRadius.circular(16),
+      ),
     );
   }
 }
