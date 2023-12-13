@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:pet4life/firebase_options.dart';
 
 import 'styles/colors.dart';
-import 'screens/login_screen.dart';
+import 'widgets/onboarding.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,7 +31,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: const OnBoardingScreen(),
+      // home: LoginScreen()
     );
   }
 }
