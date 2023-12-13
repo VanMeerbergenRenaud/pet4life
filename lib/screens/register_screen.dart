@@ -33,12 +33,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Future<void> _registerUser(BuildContext context) async {
     if (_registerFormKey.currentState!.validate()) {
       try {
-        UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        UserCredential userCredential =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: _emailController.text,
           password: _passwordController.text,
         );
         // Update the displayName of the Firebase User
-        await userCredential.user!.updateProfile(displayName: _nameController.text);
+        await userCredential.user!.updateDisplayName(_nameController.text);
 
         await FirebaseFirestore.instance
             .collection('users')

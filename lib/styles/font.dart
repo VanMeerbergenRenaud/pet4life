@@ -20,6 +20,18 @@ const kText = TextStyle(
   color: kBlack,
 );
 
+const kTextButtonOrange = TextStyle(
+  fontSize: 16,
+  fontWeight: FontWeight.w600,
+  color: kMainColor,
+);
+
+const kConfidentialityTitle = TextStyle(
+  color: kSecondaryColor,
+  fontSize: 18,
+  fontWeight: FontWeight.bold,
+);
+
 const kSmallTextGray = TextStyle(
   fontSize: 12,
   fontWeight: FontWeight.w400,
