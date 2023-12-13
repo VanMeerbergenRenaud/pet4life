@@ -69,6 +69,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '315602019032',
     projectId: 'pet4life-2023-2024',
     storageBucket: 'pet4life-2023-2024.appspot.com',
+    androidClientId: '315602019032-ic9f2fvtnr015pa9j52kk08c0269o5lv.apps.googleusercontent.com',
+    iosClientId: '315602019032-off5t000t62k4vgllq7940bsi3cobera.apps.googleusercontent.com',
     iosBundleId: 'be.hepl.pet4life',
   );
 }

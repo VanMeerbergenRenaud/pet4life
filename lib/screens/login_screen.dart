@@ -8,6 +8,7 @@ import '../widgets/form/text_input.dart';
 import '../widgets/form/password_input.dart';
 import '../widgets/form/validation.dart';
 
+import '../widgets/services/auth_services.dart';
 import 'main_screen.dart';
 import 'register_screen.dart';
 
@@ -30,8 +31,7 @@ class LoginScreen extends StatelessWidget {
       _showSnackBar(context, 'Connexion réussie !');
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) =>
-          const MainScreenPage(),
+          builder: (context) => const MainScreenPage(),
         ),
       );
     } on FirebaseAuthException catch (e) {
@@ -149,24 +149,50 @@ class LoginScreen extends StatelessWidget {
                   style: kText,
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(
+              Padding(
+                padding: const EdgeInsets.symmetric(
                   horizontal: kHorizontalPadding,
                   vertical: kVerticalPadding,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Logo Google
-                    // Logo Apple
-                    // Logo Facebook
+                    // Google button with image
+                    TextButton(
+                      onPressed: () {
+                        AuthServices().signInWithGoogle();
+                      },
+                      child: Image.asset(
+                        'assets/img/google.png',
+                        width: 32,
+                      ),
+                    ),
+                    // Apple button with image
+                    TextButton(
+                      onPressed: () {
+                        // AuthServices().signInWithGoogle();
+                      },
+                      child: Image.asset(
+                        'assets/img/apple.png',
+                        width: 32,
+                      ),
+                    ),
+                    // Facebook button with image
+                    TextButton(
+                      onPressed: () {
+                        // AuthServices().signInWithGoogle();
+                      },
+                      child: Image.asset(
+                        'assets/img/facebook.png',
+                        width: 32,
+                      ),
+                    ),
                   ],
                 ),
               ),
               // Not subscribe yet
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: kVerticalPaddingL),
+                padding: const EdgeInsets.symmetric(vertical: kVerticalPadding),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

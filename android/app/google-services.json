@@ -12,7 +12,20 @@
           "package_name": "be.hepl.pet4life"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "315602019032-ic9f2fvtnr015pa9j52kk08c0269o5lv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "be.hepl.pet4life",
+            "certificate_hash": "af72c23a7073d644050b90d29403073d27493c37"
+          }
+        },
+        {
+          "client_id": "315602019032-neut5oofe8hobi8p1n47t0s742updgtv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyC-ktQBcthyqAPUqvtWA_4hC_-8cle9qQA"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "315602019032-neut5oofe8hobi8p1n47t0s742updgtv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "315602019032-off5t000t62k4vgllq7940bsi3cobera.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "be.hepl.pet4life"
+              }
+            }
+          ]
         }
       }
     }
