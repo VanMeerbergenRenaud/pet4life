@@ -160,7 +160,7 @@ class LoginScreen extends StatelessWidget {
                     // Google button with image
                     TextButton(
                       onPressed: () {
-                        AuthServices().signInWithGoogle();
+                        // AuthServices().signInWithGoogle();
                       },
                       child: Image.asset(
                         'assets/img/google.png',
@@ -170,7 +170,7 @@ class LoginScreen extends StatelessWidget {
                     // Apple button with image
                     TextButton(
                       onPressed: () {
-                        // AuthServices().signInWithGoogle();
+                        // AuthServices().signInWithApple();
                       },
                       child: Image.asset(
                         'assets/img/apple.png',
@@ -180,7 +180,7 @@ class LoginScreen extends StatelessWidget {
                     // Facebook button with image
                     TextButton(
                       onPressed: () {
-                        // AuthServices().signInWithGoogle();
+                        // AuthServices().signInWithFacebook();
                       },
                       child: Image.asset(
                         'assets/img/facebook.png',

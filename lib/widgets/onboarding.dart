@@ -61,7 +61,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         );
                       } else {
                         _pageController.nextPage(
-                          duration: const Duration(milliseconds: 300),
+                          duration: const Duration(milliseconds: 10),
                           curve: Curves.ease,
                         );
                       }
