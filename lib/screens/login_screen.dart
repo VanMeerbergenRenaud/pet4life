@@ -8,7 +8,6 @@ import '../widgets/form/text_input.dart';
 import '../widgets/form/password_input.dart';
 import '../widgets/form/validation.dart';
 
-import '../widgets/services/auth_services.dart';
 import 'main_screen.dart';
 import 'register_screen.dart';
 

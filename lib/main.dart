@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:pet4life/firebase_options.dart';
+import 'firebase_options.dart';
 
 import 'styles/colors.dart';
 import 'widgets/onboarding.dart';

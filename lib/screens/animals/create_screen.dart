@@ -6,7 +6,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:pet4life/widgets/form/validation.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../styles/colors.dart';
@@ -15,6 +14,7 @@ import '../../styles/spacings.dart';
 import '../../widgets/buttons/main_button.dart';
 import '../../widgets/form/select_option.dart';
 import '../../widgets/form/text_input.dart';
+import '../../widgets/form/validation.dart';
 import '../../widgets/image_picker.dart';
 import '../../widgets/services/firestore.dart';
 
