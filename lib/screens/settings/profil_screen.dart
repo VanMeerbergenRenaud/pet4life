@@ -40,18 +40,18 @@ class ProfilScreen extends StatelessWidget {
                 children: [
                   const SizedBox(height: 24),
                   const Text(
-                    'Photo ou memoji',
+                    'Vous pouvez modifier votre profil ici !',
                     style: kLabelStyle,
                   ),
                   const Padding(
                     padding: EdgeInsets.symmetric(vertical: kPaddingS),
                     child: Text(
-                      'Sélectionner un avatar parmi la liste',
+                      'Seul le mot de passe n‘est pas modifiable pour des raisons de sécurité.',
                       style: kSmallTextGray,
                     ),
                   ),
 
-                  const SizedBox(height: kVerticalPaddingL),
+                  const SizedBox(height: kVerticalPadding),
 
                   // Name input
                   TextInput(
@@ -89,15 +89,14 @@ class ProfilScreen extends StatelessWidget {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
 
-                        // Update the user's profile
                         await _auth.currentUser!
                             .updateProfile(displayName: _nameController.text);
 
-                        // Update the user's email
+                        // Send a verification email before updating the user's email
+                        await _auth.currentUser!.sendEmailVerification();
                         await _auth.currentUser!
                             .updateEmail(_emailController.text);
 
-                        // If you store additional user data in Firestore, update that data
                         await FirebaseFirestore.instance
                             .collection('users')
                             .doc(_auth.currentUser!.uid)
