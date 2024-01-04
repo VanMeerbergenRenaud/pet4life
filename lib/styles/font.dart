@@ -20,6 +20,12 @@ const kText = TextStyle(
   color: kBlack,
 );
 
+const kSmallTitle = TextStyle(
+  fontSize: 18,
+  fontWeight: FontWeight.w400,
+  color: kBlack,
+);
+
 const kTextButtonOrange = TextStyle(
   fontSize: 16,
   fontWeight: FontWeight.w600,

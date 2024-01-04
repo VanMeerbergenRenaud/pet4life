@@ -27,7 +27,8 @@ class AnimalsPageScreenCreate extends StatefulWidget {
   final String docID;
 
   @override
-  State<AnimalsPageScreenCreate> createState() => _AnimalsPageScreenCreateState();
+  State<AnimalsPageScreenCreate> createState() =>
+      _AnimalsPageScreenCreateState();
 }
 
 class _AnimalsPageScreenCreateState extends State<AnimalsPageScreenCreate> {
@@ -381,9 +382,7 @@ class _AnimalsPageScreenCreateState extends State<AnimalsPageScreenCreate> {
                     label: 'Créer l‘animal',
                   ),
                 ),
-                const SizedBox(
-                  height: kVerticalPaddingL,
-                )
+                const SizedBox(height: kVerticalPaddingL),
               ],
             ),
           ),

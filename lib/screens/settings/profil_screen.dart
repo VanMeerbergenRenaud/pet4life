@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:pet4life/screens/main/home_screen.dart';
 
 import '../../styles/font.dart';
 import '../../styles/spacings.dart';
@@ -12,6 +15,13 @@ class ProfilScreen extends StatelessWidget {
   ProfilScreen({super.key});
 
   final _formKey = GlobalKey<FormState>();
+  final _auth = FirebaseAuth.instance;
+
+  // Add TextEditingController for each field
+  final _nameController = TextEditingController(
+      text: FirebaseAuth.instance.currentUser!.displayName);
+  final _emailController =
+      TextEditingController(text: FirebaseAuth.instance.currentUser!.email);
 
   @override
   Widget build(BuildContext context) {
@@ -36,27 +46,16 @@ class ProfilScreen extends StatelessWidget {
                   const Padding(
                     padding: EdgeInsets.symmetric(vertical: kPaddingS),
                     child: Text(
-                      'Uploader une photo de type jpeg, jpg, png.',
+                      'Sélectionner un avatar parmi la liste',
                       style: kSmallTextGray,
                     ),
                   ),
-                  Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          //
-                        },
-                        child: Container(
-                          //
-                        ),
-                      ),
-                    ],
-                  ),
+
                   const SizedBox(height: kVerticalPaddingL),
 
-                  // --------- FORM ---------
                   // Name input
                   TextInput(
+                    controller: _nameController,
                     prefixIcon: Icons.person,
                     hintText: 'Dominique',
                     labelText: 'Nom d’utilisateur',
@@ -64,12 +63,15 @@ class ProfilScreen extends StatelessWidget {
                     validator: (value) {
                       return validateName(value!, 'Nom d’utilisateur');
                     },
-                    initialValue: 'Renaud',
                   ),
+
                   // Email input
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: kVerticalPadding + 4),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: kVerticalPadding + 4,
+                    ),
                     child: TextInput(
+                      controller: _emailController,
                       prefixIcon: Icons.email,
                       hintText: 'example@gmail.com',
                       labelText: 'Adresse mail',
@@ -77,35 +79,34 @@ class ProfilScreen extends StatelessWidget {
                         return validateEmail(value!);
                       },
                       keyboardType: TextInputType.emailAddress,
-                      initialValue: 'john.doe@example.com',
-                      // controller: _email,
                     ),
                   ),
-                  // Password input
-                  PasswordInput(
-                    prefixIcon: Icons.lock,
-                    hintText: '*******',
-                    labelText: 'Password',
-                    onChanged: (value) {},
-                    validator: (value) {
-                      return validatePassword(value!);
-                    },
-                    initialValue: 'password123',
-                    // controller: _password,
-                  ),
-                  // --------- END FORM ---------
 
-                  const SizedBox(height: 48),
+                  const SizedBox(height: kVerticalPadding),
+
                   MainButton(
-                    onTap: () {
+                    onTap: () async {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const SettingsPageScreen(),
-                          ),
-                        );
+
+                        // Update the user's profile
+                        await _auth.currentUser!
+                            .updateProfile(displayName: _nameController.text);
+
+                        // Update the user's email
+                        await _auth.currentUser!
+                            .updateEmail(_emailController.text);
+
+                        // If you store additional user data in Firestore, update that data
+                        await FirebaseFirestore.instance
+                            .collection('users')
+                            .doc(_auth.currentUser!.uid)
+                            .update({
+                          'name': _nameController.text,
+                          'email': _emailController.text,
+                        });
+
+                        Navigator.pop(context);
                       }
                     },
                     label: 'Sauvegarder',

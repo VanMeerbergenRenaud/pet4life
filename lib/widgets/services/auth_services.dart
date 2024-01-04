@@ -22,11 +22,9 @@ class AuthServices {
       );
 
       return await FirebaseAuth.instance.signInWithCredential(credential);
-    } on PlatformException catch (e) {
-      print('Error signing in with Google: ${e.message}');
+    } on PlatformException {
       return null;
     } catch (e) {
-      print('Unexpected error occurred: $e');
       return null;
     }
   }

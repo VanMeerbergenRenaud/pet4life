@@ -78,6 +78,9 @@ class HomePageScreen extends StatelessWidget {
                         child: StreamBuilder<QuerySnapshot<Pet>>(
                           stream: firestoreService.getAnimals(),
                           builder: (context, snapshot) {
+                            if (snapshot.hasError) {
+                              return Text('Error: ${snapshot.error}');
+                            }
                             if (snapshot.hasData) {
                               List<DocumentSnapshot<Pet>> petsList =
                                   snapshot.data!.docs;
