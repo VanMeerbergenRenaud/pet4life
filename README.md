@@ -97,9 +97,9 @@ utilisateur cohérente et engageante.
   captures d'écran.
 
     <div style="text-align:center; margin:48px 0;">
-        <img src="assets/readme/vitusvet1.png" width="694" height="1372" style="border-radius: 48px; width:275px; height: max-content; margin-right: 16px"  alt="image numéro 1 de démonstration de l'application Vitus Vet"/>
-        <img src="assets/readme/vitusvet2.png" width="694" height="1372" style="border-radius: 48px; width:275px; height: max-content; margin-right: 16px"  alt="image numéro 2 de démonstration de l'application Vitus Vet"/>
-        <img src="assets/readme/vitusvet3.png" width="694" height="1372" style="border-radius: 48px; width:275px; height: max-content"  alt="image numéro 3 de démonstration de l'application Vitus Vet"/>
+        <img src="assets/readme/vitusvet1.png" align="left" width="250px" style="border-radius: 48px; margin-right: 16px"  alt="image numéro 1 de démonstration de l'application Vitus Vet"/>
+        <img src="assets/readme/vitusvet2.png" align="center" width="250px" style="border-radius: 48px; margin-right: 16px"  alt="image numéro 2 de démonstration de l'application Vitus Vet"/>
+        <img src="assets/readme/vitusvet3.png" align="right" width="250px" style="border-radius: 48px;"  alt="image numéro 3 de démonstration de l'application Vitus Vet"/>
     </div>
 
 ## 🎯 Public cible
