@@ -50,8 +50,7 @@ utilisateur cohérente et engageante.
 
 > La plupart des applications existantes sont des applications d’adoptions d’animaux, de services de tracker pour suivre
 > son animal avec un traceur ou alors, on peut enregistrer ces animaux, mais rien n’est complet, sans parler du design
-> qui
-> est loin d’être réfléchi et pensé pour les utilisateurs ciblés.
+> qui est loin d’être réfléchi et pensé pour les utilisateurs ciblés.
 
 - [**Great Pet Care**](https://greatpetcare.com/) 🏆
     - **Points Forts :** Great Pet Care est une application web bien établie qui offre une gamme complète de services
@@ -68,10 +67,8 @@ utilisateur cohérente et engageante.
         - Il n'y a pas encore de version mobile de l'application sur l'AppStore ou le PlayStore, ce qui peut être un
           inconvénient pour certains utilisateurs.
 
-    <div style="text-align:center; margin:48px 0;">
-        <img src="assets/readme/greatpetcare1.gif" width="282" height="492" style="border-radius: 12px; width:275px; height: max-content; margin-right: 16px"  alt="gif numéro 1 de démonstration de l'application GreatPetCare"/>
-        <img src="assets/readme/greatpetcare2.gif" width="282" height="492" style="border-radius: 12px; width:275px; height: max-content"  alt="gif numéro 2 de démonstration de l'application GreatPetCare"/>
-    </div>
+    <img src="assets/readme/greatpetcare1.gif" width="250" alt="gif numéro 1 de démonstration de l'application GreatPetCare"/>
+    <img src="assets/readme/greatpetcare2.gif" width="250" alt="gif numéro 2 de démonstration de l'application GreatPetCare"/>
 
 - [**Pet Noter**](https://petnoter.com/) 📝
     - **Points Forts :** Pet Noter semble se concentrer sur la simplicité et la prise de notes rapides concernant les
@@ -81,10 +78,8 @@ utilisateur cohérente et engageante.
       complète. L'absence de fonctionnalités telles que la gestion des rendez-vous ou la centralisation des informations
       sur plusieurs animaux peut être un inconvénient pour certains propriétaires.
 
-    <div style="text-align:center; margin:48px 0;">
-        <img src="assets/readme/petnoter1.gif" align="left" width="250" style="border-radius: 12px; margin-right: 16px"  alt="gif numéro 1 de démonstration de l'application PetNoter"/>
-        <img src="assets/readme/petnoter2.gif" align="right" width="250" style="border-radius: 12px;"  alt="gif numéro 2 de démonstration de l'application PetNoter"/>
-    </div>
+    <img src="assets/readme/petnoter1.gif" width="250" alt="gif numéro 1 de démonstration de l'application PetNoter"/>
+    <img src="assets/readme/petnoter2.gif" width="250" alt="gif numéro 2 de démonstration de l'application PetNoter"/>
 
 - [**Vitus Vet**](https://vitusvet.com/) 🏥
     - **Points Forts :** Vitus Vet se concentre principalement sur la gestion des soins de santé de l'animal. Il offre
@@ -96,11 +91,9 @@ utilisateur cohérente et engageante.
   > **NB :** Je n'ai pas pu tester l'application, car elle n'est pas disponible en Belgique, voici tout de même quelques
   captures d'écran.
 
-    <div style="text-align:center; margin:48px 0;">
-        <img src="assets/readme/vitusvet1.png" align="left" width="250px" style="border-radius: 48px; margin-right: 16px"  alt="image numéro 1 de démonstration de l'application Vitus Vet"/>
-        <img src="assets/readme/vitusvet2.png" align="center" width="250px" style="border-radius: 48px; margin-right: 16px"  alt="image numéro 2 de démonstration de l'application Vitus Vet"/>
-        <img src="assets/readme/vitusvet3.png" align="right" width="250px" style="border-radius: 48px;"  alt="image numéro 3 de démonstration de l'application Vitus Vet"/>
-    </div>
+    <img src="assets/readme/vitusvet1.png" align="left" width="250" alt="image numéro 1 de démonstration de l'application Vitus Vet"/>
+    <img src="assets/readme/vitusvet2.png" align="center" width="250" alt="image numéro 2 de démonstration de l'application Vitus Vet"/>
+    <img src="assets/readme/vitusvet3.png" align="right" width="250" alt="image numéro 3 de démonstration de l'application Vitus Vet"/>
 
 ## 🎯 Public cible
 
@@ -126,8 +119,7 @@ utilisateur cohérente et engageante.
 3. **Centralisation des informations :**
    Toutes les informations relatives à vos animaux de compagnie se retrouvent en un
    seul endroit, simplifiant la gestion de plusieurs animaux et facilitant la consultation de leurs données
-   essentielles,
-   aussi bien pour vous que pour les vétérinaires.
+   essentielles, aussi bien pour vous que pour les vétérinaires.
 
 4. **Consultation et réservation en ligne :**
    Vous pouvez prendre rendez-vous en ligne avec des vétérinaires ou d'autres
@@ -135,8 +127,8 @@ utilisateur cohérente et engageante.
    événements avec vos animaux de compagnie.
 
    <div style="text-align:center; margin:48px 0;">
-        <img src="assets/readme/pet4life1.gif" align="left" width="250" style="border-radius: 12px; margin-right: 16px"  alt="gif numéro 1 de démonstration de l'application Pet4Life"/>
-        <img src="assets/readme/pet4life2.gif" align="right" width="250" style="border-radius: 12px;"  alt="gif numéro 2 de démonstration de l'application Pet4Life"/>
+        <img src="assets/readme/pet4life1.gif" width="250"  alt="gif numéro 1 de démonstration de l'application Pet4Life"/>
+        <img src="assets/readme/pet4life2.gif" width="250"  alt="gif numéro 2 de démonstration de l'application Pet4Life"/>
    </div>
 
 ## 📱 Pages de l'application
