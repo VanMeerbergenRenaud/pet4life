@@ -170,8 +170,9 @@ L’accueil sert de point central pour gérer ses animaux de compagnie et leurs 
 
 ## 🔗 Liens utiles pour le projet
 
-- [Accéder au rapport technique en _anglais_ (PDF)](./assets/readme/rapport_technique.pdf)
-- [Accéder à la maquette de design](https://xd.adobe.com/view/dc136097-39f2-4032-adf4-922b0241ff0a-8940/?fullscreen)
+- [Tutoriel d'installation (PDF)](./assets/readme/installation.pdf)
+- [Rapport technique en _anglais_ (PDF)](./assets/readme/rapport_technique.pdf)
+- [Maquette de design](https://xd.adobe.com/view/dc136097-39f2-4032-adf4-922b0241ff0a-8940/?fullscreen)
 
 ## Contact
 
