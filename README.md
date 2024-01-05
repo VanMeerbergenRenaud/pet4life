@@ -55,24 +55,23 @@ utilisateur cohérente et engageante.
 
 - [**Great Pet Care**](https://greatpetcare.com/) 🏆
     - **Points Forts :** Great Pet Care est une application web bien établie qui offre une gamme complète de services
-      pour
-      les propriétaires d'animaux de compagnie. Elle se distingue par la variété des fonctionnalités qu'elle propose,
+      pour les propriétaires d'animaux de compagnie. Elle se distingue par la variété des fonctionnalités qu'elle
+      propose,
       notamment la gestion des rendez-vous, le suivi médical, les rappels, et même la possibilité de commander des
       produits pour animaux.
     - **Points Faibles :**
-        - La complexité de l'application peut être un obstacle pour les utilisateurs qui préfèrent une solution plus
-          simple.
-          Les fonctionnalités avancées peuvent être inutiles pour les utilisateurs qui recherchent une approche plus
-          légère.
-        - Il n'y a pas encore de version mobile de l'application, ce qui peut être un inconvénient pour certains
-          utilisateurs.
+        - Au début la complexité de l'application était un obstacle pour les utilisateurs qui auraient voulu une
+          solution plus
+          simple. Cependant, l'application a récemment lancé une version mobile qui offre une expérience plus légère et
+          bien plus intuitive.
 
-- [**Vitus Vet**](https://vitusvet.com/) 🏥
-    - **Points Forts :** Vitus Vet se concentre principalement sur la gestion des soins de santé de l'animal. Il offre
-      des fonctionnalités spécifiques aux vétérinaires, telles que la gestion des dossiers médicaux. Cela en fait un
-      choix solide pour les professionnels de la santé animale.
-    - **Points Faibles :** Pour les propriétaires d'animaux, il peut manquer certaines fonctionnalités plus
-      générales, telles que la gestion d'événements et de réservations en ligne.
+        - Il n'y a pas encore de version mobile de l'application sur l'AppStore ou le PlayStore, ce qui peut être un
+          inconvénient pour certains utilisateurs.
+
+    <div style="text-align:center; margin:48px 0;">
+        <img src="assets/readme/greatpetcare1.gif" width="282" height="492" style="border-radius: 12px; width:275px; height: max-content; margin-right: 16px"  alt="gif numéro 1 de démonstration de l'application GreatPetCare"/>
+        <img src="assets/readme/greatpetcare2.gif" width="282" height="492" style="border-radius: 12px; width:275px; height: max-content"  alt="gif numéro 2 de démonstration de l'application GreatPetCare"/>
+    </div>
 
 - [**Pet Noter**](https://petnoter.com/) 📝
     - **Points Forts :** Pet Noter semble se concentrer sur la simplicité et la prise de notes rapides concernant les
@@ -82,9 +81,26 @@ utilisateur cohérente et engageante.
       complète. L'absence de fonctionnalités telles que la gestion des rendez-vous ou la centralisation des informations
       sur plusieurs animaux peut être un inconvénient pour certains propriétaires.
 
-- **Applications de rappels et calendrier** 📆
-    - L’application se distingue en proposant une solution complète, allant au-delà des simples rappels ou de la prise
-      de rendez-vous.
+    <div style="text-align:center; margin:48px 0;">
+        <img src="assets/readme/petnoter1.gif" width="282" height="494" style="border-radius: 12px; width:275px; height: max-content; margin-right: 16px"  alt="gif numéro 1 de démonstration de l'application PetNoter"/>
+        <img src="assets/readme/petnoter2.gif" width="282" height="494" style="border-radius: 12px; width:275px; height: max-content"  alt="gif numéro 2 de démonstration de l'application PetNoter"/>
+    </div>
+
+- [**Vitus Vet**](https://vitusvet.com/) 🏥
+    - **Points Forts :** Vitus Vet se concentre principalement sur la gestion des soins de santé de l'animal. Il offre
+      des fonctionnalités spécifiques aux vétérinaires, telles que la gestion des dossiers médicaux. Cela en fait un
+      choix solide pour les professionnels de la santé animale.
+    - **Points Faibles :** Pour les propriétaires d'animaux, il peut manquer certaines fonctionnalités plus
+      générales, telles que la gestion d'événements et de réservations en ligne.
+
+  > **NB :** Je n'ai pas pu tester l'application, car elle n'est pas disponible en Belgique, voici tout de même quelques
+  captures d'écran.
+
+    <div style="text-align:center; margin:48px 0;">
+        <img src="assets/readme/vitusvet1.png" width="694" height="1372" style="border-radius: 48px; width:275px; height: max-content; margin-right: 16px"  alt="image numéro 1 de démonstration de l'application Vitus Vet"/>
+        <img src="assets/readme/vitusvet2.png" width="694" height="1372" style="border-radius: 48px; width:275px; height: max-content; margin-right: 16px"  alt="image numéro 2 de démonstration de l'application Vitus Vet"/>
+        <img src="assets/readme/vitusvet3.png" width="694" height="1372" style="border-radius: 48px; width:275px; height: max-content"  alt="image numéro 3 de démonstration de l'application Vitus Vet"/>
+    </div>
 
 ## 🎯 Public cible
 
@@ -117,6 +133,11 @@ utilisateur cohérente et engageante.
    Vous pouvez prendre rendez-vous en ligne avec des vétérinaires ou d'autres
    services liés aux animaux via l'application. Vous pouvez également réserver des activités ou participer à des
    événements avec vos animaux de compagnie.
+
+   <div style="text-align:center; margin:48px 0;">
+        <img src="assets/readme/pet4life1.gif" width="344" height="738" style="border-radius: 12px; width:300px; height: max-content; margin-right: 16px"  alt="gif numéro 1 de démonstration de l'application Pet4Life"/>
+        <img src="assets/readme/pet4life2.gif" width="344" height="738" style="border-radius: 12px; width:300px; height: max-content"  alt="gif numéro 2 de démonstration de l'application Pet4Life"/>
+   </div>
 
 ## 📱 Pages de l'application
 

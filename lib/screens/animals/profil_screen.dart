@@ -208,7 +208,10 @@ class _PetProfileScreenState extends State<PetProfileScreen> {
           );
         } else {
           return const Center(
-            child: CircularProgressIndicator(),
+            child: Text(
+              'Aucun animal trouvé',
+              style: kTitleStyle,
+            ),
           );
         }
       },

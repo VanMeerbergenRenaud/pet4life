@@ -19,11 +19,11 @@ class _MainScreenPageState extends State<MainScreenPage> {
   int _currentIndex = 0;
 
   final List _pages = [
-     const HomePageScreen(),
+    const HomePageScreen(),
     AnimalsPageScreen(),
-     const VetsPageScreen(),
-     const RemindersPageScreen(),
-     const SettingsPageScreen(),
+    const VetsPageScreen(),
+    const RemindersPageScreen(),
+    const SettingsPageScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -36,29 +36,29 @@ class _MainScreenPageState extends State<MainScreenPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _pages[_currentIndex],
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          if (_currentIndex == 1) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const AnimalsPageScreenCreate(docID: '',),
-              ),
-            );
-          } else if (_currentIndex == 2) {
-            // new vet
-          } else if (_currentIndex == 3) {
-            // new reminder
-          } else {
-            // redirect to home page
-            setState(() {
-              _currentIndex = 0;
-            });
-          }
-        },
-        backgroundColor: kMainColor,
-        child: const Icon(Icons.add),
-      ),
+      floatingActionButton:
+          (_currentIndex == 1 || _currentIndex == 2 || _currentIndex == 3)
+              ? FloatingActionButton(
+                  onPressed: () {
+                    if (_currentIndex == 1) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AnimalsPageScreenCreate(
+                            docID: '',
+                          ),
+                        ),
+                      );
+                    } else if (_currentIndex == 2) {
+                      // Todo: new vet
+                    } else if (_currentIndex == 3) {
+                      // Todo: new reminder
+                    }
+                  },
+                  backgroundColor: kMainColor,
+                  child: const Icon(Icons.add),
+                )
+              : null,
       bottomNavigationBar: BottomNavigationBar(
         // type: BottomNavigationBarType.fixed,
         selectedItemColor: kMainColor,

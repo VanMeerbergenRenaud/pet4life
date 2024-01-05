@@ -123,6 +123,27 @@ class _AnimalsPageScreenCreateState extends State<AnimalsPageScreenCreate> {
                                     ),
                                   ),
                                 ),
+
+                          // si l'image est null, on affiche un bouton pour ajouter une image
+                          _image == null
+                              ? Positioned(
+                                  bottom: 0,
+                                  right: 0,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      selectImage();
+                                    },
+                                    child: const CircleAvatar(
+                                      radius: 18.0,
+                                      child: Icon(
+                                        Icons.add_a_photo,
+                                        color: kTertiaryColor,
+                                        size: 18,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              : const SizedBox(),
                         ],
                       ),
                       // Text to say add an image
