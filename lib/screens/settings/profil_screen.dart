@@ -1,15 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:pet4life/screens/main/home_screen.dart';
 
 import '../../styles/font.dart';
 import '../../styles/spacings.dart';
 import '../../widgets/buttons/main_button.dart';
-import '../../widgets/form/password_input.dart';
 import '../../widgets/form/text_input.dart';
 import '../../widgets/form/validation.dart';
-import '../main/settings_screen.dart';
 
 class ProfilScreen extends StatelessWidget {
   ProfilScreen({super.key});
