@@ -82,8 +82,8 @@ utilisateur cohérente et engageante.
       sur plusieurs animaux peut être un inconvénient pour certains propriétaires.
 
     <div style="text-align:center; margin:48px 0;">
-        <img src="assets/readme/petnoter1.gif" width="282" height="494" style="border-radius: 12px; width:275px; height: max-content; margin-right: 16px"  alt="gif numéro 1 de démonstration de l'application PetNoter"/>
-        <img src="assets/readme/petnoter2.gif" width="282" height="494" style="border-radius: 12px; width:275px; height: max-content"  alt="gif numéro 2 de démonstration de l'application PetNoter"/>
+        <img src="assets/readme/petnoter1.gif" align="left" width="250" style="border-radius: 12px; margin-right: 16px"  alt="gif numéro 1 de démonstration de l'application PetNoter"/>
+        <img src="assets/readme/petnoter2.gif" align="right" width="250" style="border-radius: 12px;"  alt="gif numéro 2 de démonstration de l'application PetNoter"/>
     </div>
 
 - [**Vitus Vet**](https://vitusvet.com/) 🏥
@@ -135,8 +135,8 @@ utilisateur cohérente et engageante.
    événements avec vos animaux de compagnie.
 
    <div style="text-align:center; margin:48px 0;">
-        <img src="assets/readme/pet4life1.gif" width="344" height="738" style="border-radius: 12px; width:300px; height: max-content; margin-right: 16px"  alt="gif numéro 1 de démonstration de l'application Pet4Life"/>
-        <img src="assets/readme/pet4life2.gif" width="344" height="738" style="border-radius: 12px; width:300px; height: max-content"  alt="gif numéro 2 de démonstration de l'application Pet4Life"/>
+        <img src="assets/readme/pet4life1.gif" align="left" width="250" style="border-radius: 12px; margin-right: 16px"  alt="gif numéro 1 de démonstration de l'application Pet4Life"/>
+        <img src="assets/readme/pet4life2.gif" align="right" width="250" style="border-radius: 12px;"  alt="gif numéro 2 de démonstration de l'application Pet4Life"/>
    </div>
 
 ## 📱 Pages de l'application
