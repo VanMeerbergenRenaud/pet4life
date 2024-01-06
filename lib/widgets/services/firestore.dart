@@ -35,26 +35,8 @@ class FirestoreService {
     return animal;
   }
 
-  Future<dynamic> updateAnimal(
-      String docID,
-      String newImageUrl,
-      String newName,
-      DateTime newDob,
-      double newWeight,
-      String newGender,
-      String newRace,
-      String newVaccination,
-      Timestamp newCreatedAt) {
-    return animalsCollection.doc(docID).update({
-      'imageUrl': newImageUrl,
-      'name': newName,
-      'dob': newDob,
-      'weight': newWeight,
-      'gender': newGender,
-      'race': newRace,
-      'vaccination': newVaccination,
-      'createdAt': Timestamp.now(),
-    });
+  Future<void> updateAnimal(String docID, Pet currentPet) {
+    return animalsCollection.doc(docID).update(currentPet.toJson());
   }
 
   Future<void> deleteAnimal(String docID) {
@@ -76,7 +58,7 @@ class FirestoreService {
       await _firestore.collection('pets').add({
         'imageUrl': imageUrl,
       });
-      resp = "Data saved successfully";
+      resp = "Image enregistrée avec succès";
     } catch (err) {
       resp = err.toString();
     }

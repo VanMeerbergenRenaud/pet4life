@@ -64,6 +64,8 @@ class _AnimalsPageScreenCreateState extends State<AnimalsPageScreenCreate> {
   String _vaccinated = 'vacciné';
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirestoreService firestoreService =
+      FirestoreService(FirebaseAuth.instance.currentUser!.uid);
 
   Uint8List? _image;
 
@@ -72,6 +74,24 @@ class _AnimalsPageScreenCreateState extends State<AnimalsPageScreenCreate> {
     setState(() {
       _image = img;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadAnimalData();
+  }
+
+  Future<void> loadAnimalData() async {
+    DocumentSnapshot animalSnapshot =
+        await firestoreService.getAnimal(widget.docID);
+    Pet animal = animalSnapshot.data() as Pet;
+    _nameController.text = animal.name;
+    _dobController.text = DateFormat('dd/MM/yyyy').format(animal.dob);
+    _weightController.text = animal.weight.toString();
+    _gender = animal.gender!;
+    _race = animal.race!;
+    _vaccinated = animal.vaccination!;
   }
 
   @override
@@ -384,19 +404,27 @@ class _AnimalsPageScreenCreateState extends State<AnimalsPageScreenCreate> {
                             createdAt: DateTime.now(),
                           ),
                         );
-                      } else {
+                      } else if (docID != null &&
+                          _formKey.currentState!.validate()) {
                         firestoreService.updateAnimal(
                           docID!,
-                          _image as String,
-                          _nameController.text,
-                          _dobController.text as DateTime,
-                          _weightController.text as double,
-                          _gender,
-                          _race,
-                          _vaccinated,
-                          Timestamp.now(),
+                          Pet(
+                            imageUrl: await firestoreService
+                                .uploadImageToFirebase(_image!),
+                            name: _nameController.text,
+                            dob: DateFormat('dd/MM/yyyy')
+                                .parse(_dobController.text),
+                            weight: double.parse(_weightController.text),
+                            gender: _gender,
+                            race: _race,
+                            vaccination: _vaccinated,
+                            createdAt: DateTime.now(),
+                          ),
                         );
+                      } else {
+                        print('error');
                       }
+
                       // go to previous page
                       Navigator.pop(context);
                     },

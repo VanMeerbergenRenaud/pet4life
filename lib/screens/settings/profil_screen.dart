@@ -87,7 +87,7 @@ class ProfilScreen extends StatelessWidget {
                         _formKey.currentState!.save();
 
                         await _auth.currentUser!
-                            .updateProfile(displayName: _nameController.text);
+                            .updateDisplayName(_nameController.text);
 
                         // Send a verification email before updating the user's email
                         await _auth.currentUser!.sendEmailVerification();

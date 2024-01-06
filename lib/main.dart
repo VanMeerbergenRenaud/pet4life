@@ -8,7 +8,7 @@ import 'widgets/onboarding.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  // await FirebaseNotification().iniNotification();
+  // await FirebaseNotification().initNotification();
   runApp(const MyApp());
 }
 
