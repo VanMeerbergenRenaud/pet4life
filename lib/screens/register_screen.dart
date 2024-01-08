@@ -50,14 +50,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
           'password': _passwordController.text,
         });
 
-        Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => const MainScreenPage()),
-        );
+        if (context.mounted) {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const MainScreenPage()),
+          );
+        }
       } on FirebaseAuthException catch (e) {
         String message = e.code == 'weak-password'
             ? 'Le mot de passe est trop faible.'
             : 'Ce compte existe déjà avec cet email.';
-        _showSnackBar(context, message);
+        if (context.mounted) {
+          _showSnackBar(context, message);
+        }
       }
     }
   }
@@ -99,7 +103,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     // Name input
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: kHorizontalPadding),
+                        horizontal: kHorizontalPadding,
+                      ),
                       child: TextInput(
                         prefixIcon: Icons.person,
                         hintText: 'Johnny',

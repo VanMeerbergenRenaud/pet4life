@@ -16,7 +16,9 @@ class RemindersPageScreen extends StatelessWidget {
         textAlign: TextAlign.center,
         style: kTitleStyleWhite,
       ),
-      flexibleContent: Text('Reminders'),
+      flexibleContent: Center(
+        child: Text('Vos rappels'),
+      ),
     );
   }
 }

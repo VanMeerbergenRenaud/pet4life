@@ -76,11 +76,13 @@ class SettingsPageScreen extends StatelessWidget {
                     ),
                     onTap: () async {
                       await FirebaseAuth.instance.signOut();
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => LoginScreen(),
-                        ),
-                      );
+                      if (context.mounted) {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => LoginScreen(),
+                          ),
+                        );
+                      }
                     },
                   ),
                 ],

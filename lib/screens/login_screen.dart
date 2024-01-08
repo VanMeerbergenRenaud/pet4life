@@ -27,17 +27,23 @@ class LoginScreen extends StatelessWidget {
         email: _emailController.text,
         password: _passwordController.text,
       );
-      _showSnackBar(context, 'Connexion réussie !');
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => const MainScreenPage(),
-        ),
-      );
+      if (context.mounted) {
+        _showSnackBar(context, 'Connexion réussie !');
+      }
+      if (context.mounted) {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => const MainScreenPage(),
+          ),
+        );
+      }
     } on FirebaseAuthException catch (e) {
       String message = e.code == 'user-not-found'
           ? 'Aucun utilisateur trouvé pour cet email.'
           : 'Mot de passe incorrect.';
-      _showSnackBar(context, message);
+      if (context.mounted) {
+        _showSnackBar(context, message);
+      }
     }
   }
 

@@ -11,12 +11,14 @@ class VetsPageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const HomePageTemplate(
-        title: Text(
-          'Vos vétérinaires',
-          textAlign: TextAlign.center,
-          style: kTitleStyleWhite,
-        ),
-        flexibleContent: Text('Vets'),
+      title: Text(
+        'Vos vétérinaires',
+        textAlign: TextAlign.center,
+        style: kTitleStyleWhite,
+      ),
+      flexibleContent: Center(
+        child: Text('Vos vétérinaires'),
+      ),
     );
   }
 }

@@ -52,7 +52,7 @@ class _MainScreenPageState extends State<MainScreenPage> {
                     } else if (_currentIndex == 2) {
                       // Todo: new vet
                     } else if (_currentIndex == 3) {
-                      // Todo: new reminder
+                      // Todo: new reminder + notification
                     }
                   },
                   backgroundColor: kMainColor,

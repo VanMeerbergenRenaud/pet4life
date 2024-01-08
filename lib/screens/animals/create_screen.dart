@@ -38,7 +38,7 @@ class _AnimalsPageScreenCreateState extends State<AnimalsPageScreenCreate> {
   final TextEditingController _dobController = TextEditingController();
   final TextEditingController _weightController = TextEditingController();
 
-  DateTime date = DateTime(2023, 01, 01);
+  DateTime date = DateTime(2024, 01, 01);
 
   void _showDialog(Widget child) {
     showCupertinoModalPopup<void>(
@@ -421,12 +421,15 @@ class _AnimalsPageScreenCreateState extends State<AnimalsPageScreenCreate> {
                             createdAt: DateTime.now(),
                           ),
                         );
-                      } else {
-                        print('error');
                       }
+                      /*else {
+                        print('error');
+                      }*/
 
                       // go to previous page
-                      Navigator.pop(context);
+                      if (context.mounted) {
+                        Navigator.pop(context);
+                      }
                     },
                     label: 'Créer l‘animal',
                   ),

@@ -102,7 +102,9 @@ class ProfilScreen extends StatelessWidget {
                           'email': _emailController.text,
                         });
 
-                        Navigator.pop(context);
+                        if (context.mounted) {
+                          Navigator.pop(context);
+                        }
                       }
                     },
                     label: 'Sauvegarder',

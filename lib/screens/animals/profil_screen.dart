@@ -46,7 +46,7 @@ class _PetProfileScreenState extends State<PetProfileScreen> {
           String weight = data.weight.toString();
           String gender = data.gender.toString().capitalize();
           String race = data.race.toString().capitalize();
-          // String vaccination = data.vaccination.toString().capitalize();
+          // String vaccination = data.vaccination.toString();
 
           return Scaffold(
             appBar: AppBar(
@@ -88,12 +88,9 @@ class _PetProfileScreenState extends State<PetProfileScreen> {
                   Transform.translate(
                     offset: const Offset(0, -kPaddingL),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: kPadding,
-                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: kPadding),
                       child: Container(
                         padding: const EdgeInsets.all(kPaddingL * 2 / 3),
-                        // box decoration
                         decoration: const BoxDecoration(
                           color: kWhite,
                           borderRadius: BorderRadius.all(
@@ -114,12 +111,12 @@ class _PetProfileScreenState extends State<PetProfileScreen> {
                                   ),
                                 ),
                                 /*Expanded(
-                                child: Text(
-                                  vaccination,
-                                  style: kSmallTitle,
-                                  textAlign: TextAlign.right,
-                                ),
-                              ),*/
+                                  child: Text(
+                                    vaccination,
+                                    style: kSmallTitle,
+                                    textAlign: TextAlign.right,
+                                  ),
+                                ),*/
                               ],
                             ),
                             const SizedBox(height: kPaddingS),
